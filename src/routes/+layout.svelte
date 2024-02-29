@@ -1,60 +1,55 @@
 <nav>
-    <new-rating-button>
-        New Rating
-    </new-rating-button>
-    <test-block>
-        test
-    </test-block>
+    <ul>
+        <li>
+            <a href="/new-rating">New Rating</a>
+        </li>
+        <li>
+            <a href="/test">Test</a>
+        </li>
+    </ul>
 </nav>
 
 <slot/>
 
 <style>
-    /* Default css behavior */
 
-    :global(body, html) {
+:global(body, html) {
         height: 100%;
         padding: 0;
         margin: 0;
+        background-color: #f0f0f0; /* Light gray background */
+        font-family: 'Roboto', sans-serif; /* Material UI default font */
     }
 
-
-    nav {
-        background-color: #1976d2; /* Material UI primary color */
-        color: white;
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
         display: flex;
         align-items: center;
-        padding: 10px 20px;
+        background-color: #1976d2; 
+        height: 3rem;
     }
 
-    nav > * {
-        margin-left: 10px; /* Move buttons to the left */
+    li {
+        height: 100%;
     }
 
-    nav > *:first-child {
-        margin-left: 0; /* No margin for the first button */
-    }
-
-    nav > *:hover {
-        cursor: pointer;
-    }
-
-    /* Custom element styles */
-    new-rating-button,
-    test-block {
-        display: flex;
-        border: none;
-        background-color: transparent;
+    nav ul li a {
+        text-decoration: none;
         color: white;
-        font-size: 14px;
-        text-transform: uppercase;
-        cursor: pointer;
+        display: block;
+        transition: background-color 0.3s ease;
+        height: 100%;
+        padding: 0 1rem;
     }
 
-    new-rating-button:hover,
-    test-block:hover {
+    nav ul li a:hover {
         background-color: rgba(255, 255, 255, 0.1);
     }
+
+
+
 
 </style>
 
