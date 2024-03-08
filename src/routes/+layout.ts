@@ -2,9 +2,6 @@ import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ url }) => {
 	try {
-		// get array of paths
-		console.log(url.pathname);
-
 		// split on each path route. Remove falsey ie ''
 		let pathArr = url.pathname.split('/').filter(Boolean);
 
@@ -16,6 +13,6 @@ export const load: LayoutLoad = async ({ url }) => {
 	} catch (error: any) {
 		// Handle the error here, you can log it or re-throw it if necessary
 		console.error('Error occurred:', error.message);
-		throw error; // Rethrow the error to propagate it up the call stack if needed
+		throw error; // Rethrow the error to propagate
 	}
 };

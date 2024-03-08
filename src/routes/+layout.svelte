@@ -1,7 +1,5 @@
 <script lang="ts">
 	export let data;
-
-	console.log(data.path);
 </script>
 
 <nav>
@@ -10,7 +8,7 @@
 			<a href="/" class={data.path[0] == '' ? 'selected' : ''}>Home</a>
 		</li>
 		<li>
-			<a href="/new-rating" class={data.path[0] == 'new-rating' ? 'selected' : ''}>New Rating</a>
+			<a href="/ratings" class={data.path[0] == 'ratings' ? 'selected' : ''}>Ratings</a>
 		</li>
 	</ul>
 </nav>
@@ -18,16 +16,22 @@
 <slot />
 
 <style>
+	/* #FAFAFB - Snow
+	#EFB7BA - spanish pink
+	#e5c0c8 - dust storm
+	#cbd5f0 - soap
+	#194F92 - yale blue */
+
 	:global(body, html) {
 		height: 100%;
 		padding: 0;
 		margin: 0;
-		background-color: #f7f7f7; /* Light gray background */
+		background-color: #fafafb; /* Light gray background */
 		font-family: 'Roboto', sans-serif; /* Material UI default font */
 	}
 
 	.selected {
-		background-color: #5cb55c;
+		background-color: #a0b0df;
 	}
 
 	nav ul {
@@ -36,8 +40,7 @@
 		padding: 0;
 		display: flex;
 		align-items: center;
-		background-color: #0275dd;
-
+		background-color: #cbd5f0;
 		height: 3rem;
 	}
 
@@ -47,7 +50,7 @@
 
 	nav ul li a {
 		text-decoration: none;
-		color: white;
+		color: #194f92;
 		display: flex;
 		align-items: center;
 		transition: background-color 0.3s ease;
@@ -57,6 +60,6 @@
 
 	nav ul li:hover,
 	.selected:hover {
-		background-color: #9400e7;
+		background-color: #a0b0df;
 	}
 </style>
