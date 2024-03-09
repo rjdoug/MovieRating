@@ -11,27 +11,19 @@
 	}
 </script>
 
-<main>
-	<!--  navigate to new -->
-	<add-rating-button
-		role="button"
-		tabindex="0"
-		on:keyup={onKeyUp}
-		on:click={() => {
-			goto(data.url.href + '/new');
-		}}>Add Rating</add-rating-button
-	>
-</main>
+<!--  navigate to new -->
+<add-rating-button
+	role="button"
+	tabindex="0"
+	on:keyup={onKeyUp}
+	on:click={() => {
+		goto(data.url.href + '/new');
+	}}>Add Rating</add-rating-button
+>
 
 <!-- List ratings -->
 
 <style>
-	main {
-		display: flex;
-		margin: 2rem;
-		justify-content: center;
-	}
-
 	add-rating-button {
 		border: 1px solid black;
 		border-radius: 5px;

@@ -13,7 +13,9 @@
 	</ul>
 </nav>
 
-<slot />
+<main>
+	<slot />
+</main>
 
 <style>
 	/* #FAFAFB - Snow
@@ -61,5 +63,13 @@
 	nav ul li:hover,
 	.selected:hover {
 		background-color: #a0b0df;
+	}
+
+	main {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		margin: 2rem;
+		height: 100%;
 	}
 </style>
