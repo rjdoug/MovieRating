@@ -25,7 +25,8 @@
 
 <style>
 	add-rating-button {
-		border: 1px solid black;
+		border: 1px solid #194f92;
+		color: #194f92;
 		border-radius: 5px;
 		padding: 0.5rem 1rem;
 		background-color: #cbd5f0;

@@ -2,33 +2,48 @@
 	{
 		"id": 1,
 		"category": "Originality",
-		"description": "Does the movie have an original concept or does it feel like a retread of something we've seen before?",
+		"description": "Did this movie feel totally new and exciting, or like a recycled version of something you've seen before? Think about how fresh it felt compared to other movies in its genre. Did the story take a familiar idea and spin it in a cool way, or play it completely safe?  Even if the basic idea wasn't groundbreaking, did the movie surprise you with how it was done?",
 		"weight": 10,
 		"options": [
-			{ "label": "Highly derivative, lacks originality", "value": 1 },
-			{ "label": "Somewhat unoriginal, familiar concepts", "value": 2 },
-			{ "label": "Moderately original, some unique elements", "value": 3 },
-			{ "label": "Fairly original, introduces new ideas", "value": 4 },
-			{ "label": "Highly original, groundbreaking concepts", "value": 5 }
+			{ "label": "Remake or fresh concept?", "value": 1 },
+			{ "label": "Familiar but engaging?  Or a bit derivative?", "value": 2 },
+			{ "label": "Some unique ideas, but predictable overall?", "value": 3 },
+			{ "label": "Introduces new elements that keep you interested?", "value": 4 },
+			{ "label": "Groundbreaking and unlike anything you've seen before?", "value": 5 }
 		]
 	},
 	{
 		"id": 2,
 		"category": "Acting",
-		"description": "Is the acting good enough to carry the movie? Are there standout performances from the cast members?",
+		"description": "Did the actors make you believe their characters?  Were their performances convincing and engaging?  Look for standout performances that elevate the movie.  Did any actors surprise you with their range or emotional depth?",
 		"weight": 30,
 		"options": [
-			{ "label": "Poor acting, unconvincing performances", "value": 1 },
-			{ "label": "Below average acting, lacks depth", "value": 2 },
-			{ "label": "Average acting, meets expectations", "value": 3 },
-			{ "label": "Good acting, believable performances", "value": 4 },
-			{ "label": "Outstanding acting, exceptional portrayal of characters", "value": 5 }
+			{
+				"label": "Unconvincing or unrealistic acting",
+				"value": 1
+			},
+			{
+				"label": "Characters lack depth or emotion",
+				"value": 2
+			},
+			{
+				"label": "Acting meets expectations, believable characters",
+				"value": 3
+			},
+			{
+				"label": "Actors captivate you and draw you into the story",
+				"value": 4
+			},
+			{
+				"label": "Exceptional portrayals that leave a lasting impact",
+				"value": 5
+			}
 		]
 	},
 	{
 		"id": 3,
 		"category": "Storyline",
-		"description": "Is the plot engaging and interesting throughout the entire movie? Does it keep you hooked until the end?",
+		"description": "Did the movie hold your attention? Was the plot engaging and interesting, or did you find yourself zoning out? Consider how well the story unfolded. Did it have a clear direction and keep you guessing or wanting more?",
 		"weight": 40,
 		"options": [
 			{ "label": "Confusing or nonsensical plot", "value": 1 },
@@ -41,7 +56,7 @@
 	{
 		"id": 4,
 		"category": "Pacing",
-		"description": "Is the pacing of the movie appropriate for its genre? Does it move at a steady pace without feeling too fast or too slow?",
+		"description": "Did the movie feel like it dragged or rush through the story? Consider how well the speed of the movie matched its genre. Did it feel like a slow burn that built suspense, or a fast-paced thrill ride?  Ideally, the pacing should keep you engaged without feeling rushed or bogged down.",
 		"weight": 10,
 		"options": [
 			{ "label": "Extremely slow pace, drags on", "value": 1 },
@@ -54,7 +69,7 @@
 	{
 		"id": 5,
 		"category": "Soundtrack",
-		"description": "Is the soundtrack memorable and fitting with the mood of the movie? Do the songs complement the action on screen?",
+		"description": "Did the music feel like a perfect fit for the movie?  Think about how well the songs and score complemented what was happening on screen. Did they heighten the tension, add to the humor, or create a specific atmosphere?  Ideally, the soundtrack should work with the film, not against it.",
 		"weight": 5,
 		"options": [
 			{ "label": "Disruptive or mismatched music", "value": 1 },
@@ -67,7 +82,7 @@
 	{
 		"id": 6,
 		"category": "Replay Value",
-		"description": "Would you want to see the movie again after finishing it once? Is it enjoyable enough to warrant multiple viewings?",
+		"description": "Is it enjoyable enough to warrant multiple viewings. Did the movie leave you wanting more? Did the movie leave you with unanswered questions or lingering thoughts that might be satisfied on a rewatch?",
 		"weight": 5,
 		"options": [
 			{ "label": "No desire to watch again", "value": 1 },
@@ -80,35 +95,64 @@
 	{
 		"id": 7,
 		"category": "Cinematography",
-		"description": "How well is the camera work done in the film? Is it visually appealing and effective in conveying the story?",
+		"description": "Focus on the camerawork and visuals. Did the movie use the camera effectively to tell the story? Was it visually interesting and engaging, or did it feel bland and uninspired?  Think about how the camera angles, framing, and movement contributed to the film's atmosphere and impact.",
 		"weight": 10,
 		"options": [
-			{"label": "Dull Visuals: Cinematography lacks creativity and fails to engage visually", "value": 1},
+			{
+				"label": "Cinematography lacks creativity and fails to engage visually",
+				"value": 1
+			},
 
-{"label": "Average Visuals: Some visual interest but lacks innovation and fails to leave a lasting impression", "value": 2 },
+			{
+				"label": "Okay visuals but lacks innovation and fails to leave a lasting impression",
+				"value": 2
+			},
 
-{ "label": "Good Visuals: Visually appealing with decent use of camera techniques, enhancing the storytelling", "value": 3},
+			{
+				"label": "Visually Appealing. Decent use of camera techniques, enhancing the storytelling",
+				"value": 3
+			},
 
-{ "label": "Striking Visuals: Impressive cinematography that captivates the viewer and elevates the film's aesthetic", "value": 4},
+			{
+				"label": "Captivates the viewer and elevates the film's aesthetic",
+				"value": 4
+			},
 
-{"label": "Outstanding Visuals: Exceptional cinematography that is visually stunning, innovative, and enhances the overall viewing experience significantly", "value": 5}
+			{
+				"label": "Visually stunning, innovative, and enhances the overall viewing experience significantly",
+				"value": 5
+			}
 		]
 	},
 	{
 		"id": 8,
 		"category": "Emotional Impact",
-		"description": "Did the movie make you laugh, cry, or feel any other strong emotions while watching it? If so, how powerful were those feelings?",
+		"description": "Did the movie evoke any strong emotions in you? Did it make you laugh, cry, feel scared, angry, or anything else impactful?  Consider the strength of those feelings. Did the movie leave you emotionally moved, or did it leave you feeling flat and unengaged?",
 		"weight": 10,
 		"options": [
+			{
+				"label": "Fails to evoke any significant emotional reaction",
+				"value": 1
+			},
 
-{ "label": "Minimal Emotional Response: Fails to evoke any significant emotional reaction", "value": 1},
+			{
+				"label": "Some emotional connection but lacks depth",
+				"value": 2
+			},
 
-{"label": "Mild Emotional Engagement: Some emotional connection but lacks depth", "value": 2},
+			{
+				"label": "Elicits moderate emotional responses from viewers",
+				"value": 3
+			},
+			{
+				"label": "Evokes powerful emotions and engages viewers effectively",
+				"value": 4
+			},
 
-{ "label": "Moderate Emotional Impact: Elicits moderate emotional responses from viewers", "value": 3},
-{ "label": "Strong Emotional Resonance: Evokes powerful emotions and engages viewers effectively", "value":4},
-
-{ "label": "Profound Emotional Impact: Creates a deep and lasting emotional impact on the audience", "value":5}
+			{
+				"label": "Creates a deep and lasting emotional impact on the audience",
+				"value": 5
+			}
 		]
 	}
 ]
