@@ -67,4 +67,8 @@
 		border: 1px solid rgb(202, 197, 197);
 		padding: 1rem;
 	}
+
+	category-options > *:not(:last-child) {
+		border-bottom: none;
+	}
 </style>
