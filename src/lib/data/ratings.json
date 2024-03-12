@@ -154,5 +154,18 @@
 				"value": 5
 			}
 		]
+	},
+	{
+		"id": 9,
+		"category": "Overall Enjoyment",
+		"description": "Did you have fun watching the movie, regardless of individual aspects?",
+		"weight": 10,
+		"options": [
+			{ "label": "Didn't enjoy it at all", "value": 1 },
+			{ "label": "Somewhat enjoyable, but forgettable", "value": 2 },
+			{ "label": "Neither hated nor loved it", "value": 3 },
+			{ "label": "Entertaining and enjoyable", "value": 4 },
+			{ "label": "Absolutely loved it! Highly recommend", "value": 5 }
+		]
 	}
 ]
