@@ -19,6 +19,6 @@ export const load: LayoutLoad = async ({ url, fetch }) => {
 	} catch (error: any) {
 		// Handle the error here, you can log it or re-throw it if necessary
 		console.error('Error occurred:', error.message);
-		throw error; // Rethrow the error to propagate
+		throw error;
 	}
 };
