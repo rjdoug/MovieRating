@@ -6,10 +6,20 @@
 	// Typecasting being a prick in svelte, so placing function here
 	function onKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {
-			goto(data.url.href + '/new');
+			goto(data.url?.href + '/new');
 		}
 	}
 </script>
+
+<rating-table>
+	{#if data.ratings}
+		{#each data.ratings as rating}
+			<rating-row>
+				<rating-title>{rating}</rating-title>
+			</rating-row>
+		{/each}
+	{/if}
+</rating-table>
 
 <!--  navigate to new -->
 <add-rating-button
@@ -17,7 +27,7 @@
 	tabindex="0"
 	on:keyup={onKeyUp}
 	on:click={() => {
-		goto(data.url.href + '/new');
+		goto(data.url?.href + '/new');
 	}}>Add Rating</add-rating-button
 >
 

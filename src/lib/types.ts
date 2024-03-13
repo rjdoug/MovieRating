@@ -2,6 +2,7 @@ interface Rating {
 	id: number;
 	userID: number;
 	movieID: number;
+	date: Date;
 	originality: number;
 	acting: number;
 	storyline: number;
@@ -11,4 +12,5 @@ interface Rating {
 	cinematography: number;
 	emotionalImpact: number;
 	enjoyment: number;
+	
 }

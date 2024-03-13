@@ -1,19 +1,21 @@
+import { userStore } from '$lib/stores';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
-
 
 export const load: PageLoad = async ({ url, fetch }) => {
 	try {
-		const response = await fetch(`/ratings`);
+		const uid = get(userStore);
+		const response = await fetch(`/${uid}/ratings`);
 
 		if (!response.ok) {
 			// Handle errors appropriately, e.g., throw an error or return a specific object
 			throw new Error(`Failed to fetch ratings: ${response.statusText}`);
 		}
 
-		const data: Rating[] = await response.json();
-	
+		const ratings: Rating[] = await response.json();
+
 		return {
-			ratings: data, 
+			ratings: ratings,
 			url
 		};
 	} catch (error) {
