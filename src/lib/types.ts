@@ -1,5 +1,4 @@
 interface Rating {
-	id: number;
 	userID: number;
 	movieID: number;
 	date: Date;
@@ -12,5 +11,7 @@ interface Rating {
 	cinematography: number;
 	emotionalImpact: number;
 	enjoyment: number;
-	
+	title: string;
+	imdbLink: string;
+	id: number;
 }

@@ -8,7 +8,6 @@ export const load: PageLoad = async ({ url, fetch }) => {
 		const response = await fetch(`/${uid}/ratings`);
 
 		if (!response.ok) {
-			// Handle errors appropriately, e.g., throw an error or return a specific object
 			throw new Error(`Failed to fetch ratings: ${response.statusText}`);
 		}
 
