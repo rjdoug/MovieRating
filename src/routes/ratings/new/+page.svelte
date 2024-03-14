@@ -16,6 +16,7 @@
 		// reset options selection for next page
 		selectedIndex = 0;
 	}
+	console.log(data.weights);
 </script>
 
 <category-title>{category.category}</category-title>

@@ -21,7 +21,9 @@
 						rating.date
 					).getFullYear()}
 				</rating-date>
-				<rating-value>This is where you're up to. YOu should probably store the calcualted rating as well</rating-value>
+				<rating-value
+					>This is where you're up to. YOu should probably store the calcualted rating as well</rating-value
+				>
 			</rating-row>
 		{/each}
 	{/if}

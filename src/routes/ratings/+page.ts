@@ -1,10 +1,10 @@
-import { userStore } from '$lib/stores';
+import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ url, fetch }) => {
 	try {
-		const uid = get(userStore);
+		const uid = get(userID);
 		const response = await fetch(`/${uid}/ratings`);
 
 		if (!response.ok) {
@@ -19,5 +19,6 @@ export const load: PageLoad = async ({ url, fetch }) => {
 		};
 	} catch (error) {
 		console.error('Error fetching ratings:', error);
+		throw error;
 	}
 };

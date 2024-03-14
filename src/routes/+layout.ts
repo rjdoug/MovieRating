@@ -1,4 +1,4 @@
-import { userStore } from '$lib/stores';
+import { userID } from '$lib/stores';
 import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ url, fetch }) => {
@@ -11,7 +11,7 @@ export const load: LayoutLoad = async ({ url, fetch }) => {
 
 		// Add userID to store for use later
 		// DEV: manually provided but in future will work get after authentication
-		userStore.set(1);
+		userID.set(1);
 
 		return {
 			path: pathArr
