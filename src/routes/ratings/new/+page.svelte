@@ -21,10 +21,11 @@
 
 			// store selected rating (option)
 			// convert to lowercase or it creates a new field
-			ratings[category.category.toLowerCase() as keyof Categories] = parseInt(selectedOption);
+			ratings[category.key as keyof Categories] = parseInt(selectedOption);
 
 			if (currentIndex != maxIndex) currentIndex++;
 			else {
+				// TODO: check length of ratings is same as data.ratings. IF not then json keys are incorrect
 				console.log(ratings);
 				const overallRating = calcOverallRating(data.weights, ratings);
 				console.log(overallRating);
