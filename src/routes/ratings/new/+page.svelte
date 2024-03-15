@@ -1,22 +1,42 @@
 <script lang="ts">
+	import { calcOverallRating, createEmptyRating } from '$lib/utils.js';
+
 	export let data;
 
 	let currentIndex = 0;
 	let maxIndex = data.ratings.length - 1;
 	let selectedIndex = 0;
 
+	// holds the rating for each category
+	const ratings = createEmptyRating();
+
+	//  json is problem
 	$: category = data.ratings[currentIndex];
 
 	function handleSubmit(event: Event) {
-		event.preventDefault();
-		const formData = new FormData(event.target as HTMLFormElement);
-		const selectedOption = formData.get('option') as string;
-		if (currentIndex != maxIndex) currentIndex++;
+		try {
+			event.preventDefault();
+			const formData = new FormData(event.target as HTMLFormElement);
+			const selectedOption = formData.get('option') as string;
 
-		// reset options selection for next page
-		selectedIndex = 0;
+			// store selected rating (option)
+			// convert to lowercase or it creates a new field
+			ratings[category.category.toLowerCase() as keyof Categories] = parseInt(selectedOption);
+
+			if (currentIndex != maxIndex) currentIndex++;
+			else {
+				console.log(ratings);
+				const overallRating = calcOverallRating(data.weights, ratings);
+				console.log(overallRating);
+			}
+
+			// reset options selection for next page
+			selectedIndex = 0;
+		} catch (error: any) {
+			console.error('submitting category ratings', error.message);
+			throw error;
+		}
 	}
-	console.log(data.weights);
 </script>
 
 <category-title>{category.category}</category-title>

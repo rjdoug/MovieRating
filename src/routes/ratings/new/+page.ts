@@ -7,8 +7,14 @@ export const load: PageLoad = async ({ fetch }) => {
 	const response = await fetch(`/${get(userID)}/weights`);
 	const weights: Weight[] = await response.json();
 
+	if (weights.length < 1) {
+		throw console.error('No weights found');
+	} else if (weights.length > 1) {
+		console.error('More that 1 lot of weightings found. Selecting 0 index');
+	}
+
 	return {
 		ratings,
-		weights
+		weights: weights[0]
 	};
 };

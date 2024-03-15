@@ -11,7 +11,7 @@ export const load: PageLoad = async ({ url, fetch }) => {
 			throw new Error(`Failed to fetch ratings: ${response.statusText}`);
 		}
 
-		const ratings: Rating[] = await response.json();
+		const ratings: MovieRating[] = await response.json();
 
 		return {
 			ratings: ratings,

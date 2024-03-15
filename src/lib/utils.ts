@@ -11,20 +11,30 @@ const categories: (keyof Categories)[] = [
 	'enjoyment'
 ];
 
-function calcOverallRating(weight: Weight, rating: Rating): number {
-	// Check if user IDs match between Weight and Rating
-	if (weight.userID !== rating.userID) {
-		throw new Error('Weight and Rating user IDs must match');
-	}
+// Creates an object that holds all the rating categories and sets them to 0 values
+export function createEmptyRating(): Categories {
+	return {
+		originality: 0,
+		acting: 0,
+		cinematography: 0,
+		emotionalImpact: 0,
+		enjoyment: 0,
+		pacing: 0,
+		replay: 0,
+		soundtrack: 0,
+		storyline: 0
+	};
+}
 
+export function calcOverallRating(weight: Weight, categoryRatings: Categories): number {
 	// Initialize sum of weighted scores
 	let weightedSum = 0;
 
 	// Loop through selected categories
 	for (const category of categories) {
 		// Check if category exists in both
-		if (category in weight && category in rating) {
-			weightedSum += weight[category] * rating[category];
+		if (category in weight && category in categoryRatings) {
+			weightedSum += weight[category] * categoryRatings[category];
 		} else {
 			console.error(`Invalid category: ${category}`);
 		}

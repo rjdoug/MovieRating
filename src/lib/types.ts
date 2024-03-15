@@ -1,4 +1,5 @@
-interface Rating {
+// combination of movie and rating as found in sql
+interface MovieRating {
 	userID: number;
 	movieID: number;
 	date: Date;
@@ -17,6 +18,7 @@ interface Rating {
 	id: number;
 }
 
+// weight as found in db
 interface Weight {
 	id: number;
 	userID: number;
@@ -31,6 +33,7 @@ interface Weight {
 	enjoyment: number;
 }
 
+// Categories used to rate movies
 interface Categories {
 	originality: number;
 	acting: number;
