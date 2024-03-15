@@ -1,5 +1,7 @@
 // Categories for ratings
-const categories: (keyof Categories)[] = [
+// TODO: I don't like the fact that if a key changes or is added we need to update
+// here and in the json an both are being used to access keys on different occasions
+export const categories: (keyof Categories)[] = [
 	'originality',
 	'acting',
 	'storyline',
@@ -32,14 +34,13 @@ export function calcOverallRating(weight: Weight, categoryRatings: Categories): 
 
 	// Loop through selected categories
 	for (const category of categories) {
-		// Check if category exists in both
+		// Check if category exists in bot
 		if (category in weight && category in categoryRatings) {
 			weightedSum += weight[category] * categoryRatings[category];
 		} else {
 			console.error(`Invalid category: ${category}`);
 		}
 	}
-
 	// Calculate total weight (sum of all weights)
 	const totalWeight = Object.values(weight).reduce((acc, val) => acc + val, 0);
 
