@@ -1,6 +1,7 @@
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
+import type { MovieRating } from '$lib/types';
 
 export const load: PageLoad = async ({ url, fetch }) => {
 	try {

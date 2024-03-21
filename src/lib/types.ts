@@ -1,5 +1,5 @@
 // combination of movie and rating as found in sql
-interface MovieRating {
+export interface MovieRating {
 	userID: number;
 	movieID: number;
 	date: Date;
@@ -19,7 +19,7 @@ interface MovieRating {
 }
 
 // weight as found in db
-interface Weight {
+export interface Weight {
 	id: number;
 	userID: number;
 	originality: number;
@@ -34,7 +34,7 @@ interface Weight {
 }
 
 // Categories used to rate movies
-interface Categories {
+export interface Categories {
 	originality: number;
 	acting: number;
 	storyline: number;
@@ -45,3 +45,9 @@ interface Categories {
 	emotionalImpact: number;
 	enjoyment: number;
 }
+
+export type PostRating = Categories & {
+	userID: number;
+	overallRating: number;
+	movieID: number;
+};

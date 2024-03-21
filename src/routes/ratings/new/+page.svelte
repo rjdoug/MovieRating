@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { userID } from '$lib/stores.js';
+	import type { Categories, PostRating } from '$lib/types.js';
 	import { calcOverallRating, createEmptyRating } from '$lib/utils.js';
+	import { get } from 'svelte/store';
 
 	export let data;
 
@@ -29,6 +32,15 @@
 				console.log(ratings);
 				const overallRating = calcOverallRating(data.weights, ratings);
 				console.log(overallRating);
+
+				// need to create a new movie if it doesn't exist, get the id and continue.
+				// Otherwise you need to have a way to select movie and get id that way
+				const postRating: PostRating = {
+					...ratings,
+					overallRating: overallRating
+				};
+
+				addRating(postRating);
 			}
 
 			// reset options selection for next page
@@ -36,6 +48,20 @@
 		} catch (error: any) {
 			console.error('submitting category ratings', error.message);
 			throw error;
+		}
+	}
+
+	async function addRating(rating: PostRating) {
+		const response = await fetch(`/${get(userID)}/ratings`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(rating)
+		});
+
+		if (!response.ok) {
+			// Handle errors gracefully
+			console.error('Error creating post:', await response.text());
+			return;
 		}
 	}
 </script>
