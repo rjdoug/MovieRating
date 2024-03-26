@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import SimpleButton from '$lib/SimpleButton.svelte';
 
 	export let data;
 
@@ -21,37 +22,17 @@
 						rating.date
 					).getFullYear()}
 				</rating-date>
-				<rating-value
-					>This is where you're up to. YOu should probably store the calcualted rating as well</rating-value
-				>
+				<rating-value>
+					This is where you're up to. YOu should probably store the calculated rating as well
+				</rating-value>
 			</rating-row>
 		{/each}
 	{/if}
 </rating-table>
 
-<!--  navigate to new -->
-<add-rating-button
-	role="button"
-	tabindex="0"
-	on:keyup={onKeyUp}
-	on:click={() => {
-		goto(data.url?.href + '/new');
-	}}>Add Rating</add-rating-button
->
+<SimpleButton onClick={() => goto(data.url?.href + '/new')} {onKeyUp} />
 
 <!-- List ratings -->
 
 <style>
-	add-rating-button {
-		border: 1px solid #194f92;
-		color: #194f92;
-		border-radius: 5px;
-		padding: 0.5rem 1rem;
-		background-color: #cbd5f0;
-	}
-
-	add-rating-button:hover {
-		background-color: #a0b0df;
-		cursor: pointer;
-	}
 </style>

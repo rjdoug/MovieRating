@@ -26,8 +26,6 @@ export const POST: RequestHandler = async ({ request }) => {
 	// TODO: Dummy data - need to pass in movieID
 	data.movieID = 1;
 
-	console.log(data);
-
 	try {
 		await mysqlconn.query(
 			`INSERT INTO ratings (userID, movieID, originality, acting, storyline, pacing, soundtrack,

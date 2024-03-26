@@ -1,5 +1,8 @@
 // Categories for ratings
 // TODO: I don't like the fact that if a key changes or is added we need to update
+
+import type { Categories, Weight } from "./types";
+
 // here and in the json an both are being used to access keys on different occasions
 export const categories: (keyof Categories)[] = [
 	'originality',
