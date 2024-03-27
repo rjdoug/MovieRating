@@ -14,7 +14,8 @@ export const load: LayoutLoad = async ({ url, fetch }) => {
 		userID.set(1);
 
 		return {
-			path: pathArr
+			path: pathArr,
+			url
 		};
 	} catch (error: any) {
 		// Handle the error here, you can log it or re-throw it if necessary

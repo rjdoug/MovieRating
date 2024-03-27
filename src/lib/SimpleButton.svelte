@@ -5,7 +5,7 @@
 
 <!--  navigate to new -->
 <add-rating-button role="button" tabindex="0" on:keyup={onKeyUp} on:click={onClick}>
-	Add Rating
+	<slot />
 </add-rating-button>
 
 <style>

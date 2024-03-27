@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import SimpleButton from '$lib/SimpleButton.svelte';
 	import { userID } from '$lib/stores.js';
 	import type { Categories, PostRating } from '$lib/types.js';
 	import { calcOverallRating, createEmptyRating } from '$lib/utils.js';
@@ -23,6 +25,13 @@
 
 	// Data for current category we are up to
 	$: category = data.ratings[currentIndex];
+
+	// Typecasting being a prick in svelte, so placing function here
+	function onKeyUp(event: KeyboardEvent) {
+		if (event.key == 'Enter') {
+			goto(data.url?.href + '/new');
+		}
+	}
 
 	/**
 	 * Appends the current selected option on event into ratings variable. If final category then calculate overall rating and post
@@ -117,8 +126,8 @@
 			<total-rating>Total Rating: {overallRating}/5</total-rating>
 		</completed-ratings>
 		<navigation-buttons>
-			<home-button>Home</home-button>
-			<view-button>View</view-button>
+			<SimpleButton onClick={() => goto('/')} {onKeyUp}>Home</SimpleButton>
+			<SimpleButton onClick={() => console.log(data.url)} {onKeyUp}>View</SimpleButton>
 		</navigation-buttons>
 	</completed-card>
 {/if}
@@ -213,8 +222,9 @@
 		align-items: center;
 	}
 
-	/* Style the total-rating-label element */
-	.total-rating-label {
-		margin-right: 5px;
+	navigation-buttons {
+		display: flex;
+		gap: 1rem;
+		margin: 10px 0;
 	}
 </style>

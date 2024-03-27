@@ -3,7 +3,7 @@ import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 import type { MovieRating } from '$lib/types';
 
-export const load: PageLoad = async ({ url, fetch }) => {
+export const load: PageLoad = async ({ fetch }) => {
 	try {
 		const uid = get(userID);
 		const response = await fetch(`/${uid}/ratings`);
@@ -15,8 +15,7 @@ export const load: PageLoad = async ({ url, fetch }) => {
 		const ratings: MovieRating[] = await response.json();
 
 		return {
-			ratings: ratings,
-			url
+			ratings: ratings
 		};
 	} catch (error) {
 		console.error('Error fetching ratings:', error);

@@ -23,16 +23,14 @@
 					).getFullYear()}
 				</rating-date>
 				<rating-value>
-					This is where you're up to. YOu should probably store the calculated rating as well
+					This is where you're up to. You should probably store the calculated rating as well
 				</rating-value>
 			</rating-row>
 		{/each}
 	{/if}
 </rating-table>
 
-<SimpleButton onClick={() => goto(data.url?.href + '/new')} {onKeyUp} />
-
-<!-- List ratings -->
+<SimpleButton onClick={() => goto(data.url?.href + '/new')} {onKeyUp}>New Rating</SimpleButton>
 
 <style>
 </style>
