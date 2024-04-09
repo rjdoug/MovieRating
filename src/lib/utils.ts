@@ -1,7 +1,7 @@
 // Categories for ratings
 // TODO: I don't like the fact that if a key changes or is added we need to update
 
-import type { Categories, Weight } from "./types";
+import type { Categories, Weight } from './types';
 
 // here and in the json an both are being used to access keys on different occasions
 export const categories: (keyof Categories)[] = [
@@ -49,4 +49,8 @@ export function calcOverallRating(weight: Weight, categoryRatings: Categories): 
 
 	// Divide weighted sum by total weight to get overall rating
 	return weightedSum / totalWeight;
+}
+
+export function buildTMDBImgUrl(imgPath: string, width: 150) {
+	return `https://image.tmdb.org/t/p/w${width}/` + imgPath;
 }

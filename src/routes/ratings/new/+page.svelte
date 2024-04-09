@@ -6,6 +6,7 @@
 	import { calcOverallRating, createEmptyRating } from '$lib/utils.js';
 	import 'iconify-icon';
 	import { get } from 'svelte/store';
+	import { Search } from 'carbon-components-svelte';
 
 	// data.ratings - ratings.json
 	export let data;
@@ -23,13 +24,26 @@
 
 	let overallRating = 0;
 
+	let movieSelected = false;
+
 	// Data for current category we are up to
 	$: category = data.ratings[currentIndex];
+
+	let searchValue = '';
 
 	// Typecasting being a prick in svelte, so placing function here
 	function onKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {
 			goto(data.url?.href + '/new');
+		}
+	}
+
+	async function onSearchKeyUp(event: KeyboardEvent) {
+		if (event.key == 'Enter') {
+			console.log('search');
+			const res = await fetch(`/movies?query=${encodeURIComponent(searchValue)}`);
+			const movies = await res.json();
+			console.log(movies);
 		}
 	}
 
@@ -88,48 +102,54 @@
 	}
 </script>
 
-{#if completed}
-	<category-title>{category.category}</category-title>
-	<category-description>{category.description}</category-description>
-	<!-- <category-weight>{category.weight}</category-weight> -->
+<!-- TODO: Eventually all of this crap will be moved to it's own page where /movieID/rating/edit or something of the sorts -->
 
-	<category-rating>
-		<form on:submit={handleSubmit}>
-			<category-options>
-				{#each category.options as option, index}
-					<label>
-						<input
-							type="radio"
-							name="option"
-							value={option.value}
-							checked={index === selectedIndex}
-							on:change={() => (selectedIndex = index)}
-						/>
-						{index + 1}.
-						{option.label}
-					</label>
-				{/each}
-			</category-options>
-			<button type="submit">{maxIndex === currentIndex ? 'Finish' : 'Next'}</button>
-		</form>
-		<icon-park-outline-check-one />
-	</category-rating>
-{:else}
-	<!-- I think we should just have a separate page where we get query the db to get the data out. Too complex
+{#if movieSelected}
+	{#if !completed}
+		<category-title>{category.category}</category-title>
+		<category-description>{category.description}</category-description>
+		<!-- <category-weight>{category.weight}</category-weight> -->
+
+		<category-rating>
+			<form on:submit={handleSubmit}>
+				<category-options>
+					{#each category.options as option, index}
+						<label>
+							<input
+								type="radio"
+								name="option"
+								value={option.value}
+								checked={index === selectedIndex}
+								on:change={() => (selectedIndex = index)}
+							/>
+							{index + 1}.
+							{option.label}
+						</label>
+					{/each}
+				</category-options>
+				<button type="submit">{maxIndex === currentIndex ? 'Finish' : 'Next'}</button>
+			</form>
+			<icon-park-outline-check-one />
+		</category-rating>
+	{:else}
+		<!-- I think we should just have a separate page where we get query the db to get the data out. Too complex
 	too try pulling the data out of our poorly formed data structures -->
-	<completed-card>
-		<completed-message>Rating for *movie* successfully added</completed-message>
-		<completed-icon>
-			<iconify-icon class="check-one" icon="icon-park-outline:check-one"></iconify-icon>
-		</completed-icon>
-		<completed-ratings>
-			<total-rating>Total Rating: {overallRating}/5</total-rating>
-		</completed-ratings>
-		<navigation-buttons>
-			<SimpleButton onClick={() => goto('/')} {onKeyUp}>Home</SimpleButton>
-			<SimpleButton onClick={() => console.log(data.url)} {onKeyUp}>View</SimpleButton>
-		</navigation-buttons>
-	</completed-card>
+		<completed-card>
+			<completed-message>Rating for *movie* successfully added</completed-message>
+			<completed-icon>
+				<iconify-icon class="check-one" icon="icon-park-outline:check-one"></iconify-icon>
+			</completed-icon>
+			<completed-ratings>
+				<total-rating>Total Rating: {overallRating}/5</total-rating>
+			</completed-ratings>
+			<navigation-buttons>
+				<SimpleButton onClick={() => goto('/')} {onKeyUp}>Home</SimpleButton>
+				<SimpleButton onClick={() => console.log(data.url)} {onKeyUp}>View</SimpleButton>
+			</navigation-buttons>
+		</completed-card>
+	{/if}
+{:else}
+	<Search bind:value={searchValue} on:keyup={onSearchKeyUp} />
 {/if}
 
 <style>
