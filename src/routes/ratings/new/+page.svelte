@@ -2,8 +2,8 @@
 	import { goto } from '$app/navigation';
 	import SimpleButton from '$lib/SimpleButton.svelte';
 	import { userID } from '$lib/stores.js';
-	import type { Categories, PostRating } from '$lib/types.js';
-	import { calcOverallRating, createEmptyRating } from '$lib/utils.js';
+	import type { Categories, PostRating, TMDBMovieList } from '$lib/types.js';
+	import { buildTMDBImgUrl, calcOverallRating, createEmptyRating } from '$lib/utils.js';
 	import 'iconify-icon';
 	import { get } from 'svelte/store';
 	import { Search } from 'carbon-components-svelte';
@@ -30,6 +30,12 @@
 	$: category = data.ratings[currentIndex];
 
 	let searchValue = '';
+	let movieList: TMDBMovieList = {
+		page: 1,
+		results: [],
+		total_pages: 1,
+		total_results: 0
+	};
 
 	// Typecasting being a prick in svelte, so placing function here
 	function onKeyUp(event: KeyboardEvent) {
@@ -40,11 +46,15 @@
 
 	async function onSearchKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {
-			console.log('search');
-			const res = await fetch(`/movies?query=${encodeURIComponent(searchValue)}`);
-			const movies = await res.json();
-			console.log(movies);
+			await searchMovies(searchValue);
 		}
+	}
+
+	async function searchMovies(query: string) {
+		const res = await fetch(`/movies?query=${encodeURIComponent(query)}`);
+		const mList: TMDBMovieList = await res.json();
+		movieList = mList;
+		console.log(movieList);
 	}
 
 	/**
@@ -149,7 +159,19 @@
 		</completed-card>
 	{/if}
 {:else}
-	<Search bind:value={searchValue} on:keyup={onSearchKeyUp} />
+	<Search bind:value={searchValue} on:keyup={(event) => onSearchKeyUp(event)} />
+	<movie-table>
+		{#each movieList.results as movie}
+			<div>
+				<movie-poster>
+					<img src={buildTMDBImgUrl(movie.poster_path)} alt={movie.title + ' poster'} />
+				</movie-poster>
+				<movie-title>
+					{movie.title}
+				</movie-title>
+			</div>
+		{/each}
+	</movie-table>
 {/if}
 
 <style>

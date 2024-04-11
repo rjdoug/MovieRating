@@ -51,6 +51,7 @@ export function calcOverallRating(weight: Weight, categoryRatings: Categories): 
 	return weightedSum / totalWeight;
 }
 
-export function buildTMDBImgUrl(imgPath: string, width: 150) {
-	return `https://image.tmdb.org/t/p/w${width}/` + imgPath;
+export function buildTMDBImgUrl(imgPath: string, width?: number) {
+	width = width || 185;
+	return `https://image.tmdb.org/t/p/w${width}` + imgPath;
 }

@@ -16,6 +16,7 @@ export const GET: RequestHandler = async ({ url }) => {
 		options
 	);
 	const movies = await res.json();
+	
 
 	return json(movies);
 };
