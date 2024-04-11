@@ -29,7 +29,7 @@
 	// Data for current category we are up to
 	$: category = data.ratings[currentIndex];
 
-	let searchValue = '';
+	let searchValue = 'Rick and Morty';
 	let movieList: TMDBMovieList = {
 		page: 1,
 		results: [],
@@ -162,14 +162,13 @@
 	<Search bind:value={searchValue} on:keyup={(event) => onSearchKeyUp(event)} />
 	<movie-table>
 		{#each movieList.results as movie}
-			<div>
-				<movie-poster>
-					<img src={buildTMDBImgUrl(movie.poster_path)} alt={movie.title + ' poster'} />
-				</movie-poster>
-				<movie-title>
-					{movie.title}
-				</movie-title>
-			</div>
+			<movie-poster>
+				<img
+					class="poster"
+					src={buildTMDBImgUrl(movie.poster_path)}
+					alt={movie.title + ' poster'}
+				/>
+			</movie-poster>
 		{/each}
 	</movie-table>
 {/if}
@@ -268,5 +267,32 @@
 		display: flex;
 		gap: 1rem;
 		margin: 10px 0;
+	}
+
+	movie-table {
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+		align-items: start;
+		gap: 0.5rem;
+		margin-top: 1rem;
+	}
+
+	movie-poster {
+		/* Duplicating width and height so when there's an empty img then it follow constraints */
+		height: 278px;
+		width: 185px;
+	}
+
+	.poster {
+		/* Force img to fit to 278px - Mostly the standard, but will zoom anything that doesn't fit */
+		object-fit: cover;
+		height: 278px;
+		width: 185px;
+	}
+
+	.poster:hover {
+		opacity: 0.6;
+		cursor: pointer;
 	}
 </style>
