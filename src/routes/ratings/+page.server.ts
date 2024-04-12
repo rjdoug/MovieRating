@@ -1,9 +1,9 @@
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
-import type { PageLoad } from './$types';
+import type { PageServerLoad } from './$types';
 import type { MovieRating } from '$lib/types';
 
-export const load: PageLoad = async ({ fetch }) => {
+export const load: PageServerLoad = async ({ fetch }) => {
 	try {
 		const uid = get(userID);
 		const response = await fetch(`/api/${uid}/ratings`);
