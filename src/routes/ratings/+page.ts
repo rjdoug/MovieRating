@@ -6,7 +6,7 @@ import type { MovieRating } from '$lib/types';
 export const load: PageLoad = async ({ fetch }) => {
 	try {
 		const uid = get(userID);
-		const response = await fetch(`/${uid}/ratings`);
+		const response = await fetch(`/api/${uid}/ratings`);
 
 		if (!response.ok) {
 			throw new Error(`Failed to fetch ratings: ${response.statusText}`);

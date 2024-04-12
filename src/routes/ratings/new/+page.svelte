@@ -98,7 +98,7 @@
 	}
 
 	async function addRating(rating: PostRating) {
-		const response = await fetch(`/${get(userID)}/ratings`, {
+		const response = await fetch(`/api/${get(userID)}/ratings`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(rating)
@@ -162,7 +162,7 @@
 	<Search bind:value={searchValue} on:keyup={(event) => onSearchKeyUp(event)} />
 	<movie-table>
 		{#each movieList.results as movie}
-			<movie-poster>
+			<movie-poster on:click={() => console.log(movie)}>
 				<img
 					class="poster"
 					src={buildTMDBImgUrl(movie.poster_path)}
