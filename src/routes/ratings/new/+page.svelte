@@ -17,17 +17,23 @@
 	};
 
 
+	// Calls searchMovie when Enter key is hit
 	async function onSearchKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {
-			await searchMovies(searchValue);
+			movieList = await searchMovies(searchValue);
 		}
 	}
 
+	/**
+	 * Searches for media against TMDB and updates movieList
+	 * 
+	 * @param {string }query The search string
+	 * @returns {TMDBMovieList} Movie list 
+	 */
 	async function searchMovies(query: string) {
 		const res = await fetch(`/movies?query=${encodeURIComponent(query)}`);
 		const mList: TMDBMovieList = await res.json();
-		movieList = mList;
-		console.log(movieList);
+		return mList;
 	}
 
 	
