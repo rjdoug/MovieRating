@@ -17,7 +17,6 @@
 	async function onSearchKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {
 			movieList = await searchMovies(searchValue);
-			console.log(movieList);
 		}
 	}
 

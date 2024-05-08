@@ -1,5 +1,5 @@
 // combination of movie and rating as found in sql
-export type MovieRating = {
+export type Rating = {
 	userID: number;
 	movieID: number;
 	date: Date;
@@ -13,9 +13,6 @@ export type MovieRating = {
 	emotionalImpact: number;
 	enjoyment: number;
 	totalRating: number;
-	title: string;
-	imdbLink: string;
-	id: number;
 };
 
 // weight as found in db
@@ -53,6 +50,10 @@ export type PostRating = Categories & {
 	userID?: number;
 	overallRating: number;
 	movieID: number;
+};
+
+export type RatingAndMovie = Rating & {
+	movie: TMDBMovie;
 };
 
 export type TMDBMovieList = {

@@ -1,7 +1,7 @@
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
-import type { MovieRating } from '$lib/types';
+import type { Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	try {
@@ -12,10 +12,24 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			throw new Error(`Failed to fetch ratings: ${response.statusText}`);
 		}
 
-		const ratings: MovieRating[] = await response.json();
+		const ratings: Rating[] = await response.json();
+
+		const ratingsAndMovie: RatingAndMovie[] = await Promise.all(
+			ratings.map(async (rating) => {
+				const response = await fetch(`/movies/${rating.movieID}`);
+				if (!response.ok) console.error(`cannot find movie: ${rating.movieID}`);
+
+				const movie: TMDBMovie = await response.json();
+
+				return {
+					...rating,
+					movie
+				};
+			})
+		);
 
 		return {
-			ratings: ratings
+			ratings: ratingsAndMovie
 		};
 	} catch (error) {
 		console.error('Error fetching ratings:', error);

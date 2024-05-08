@@ -10,7 +10,6 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 
 	response = await fetch(`/movies/${params.movieID}`);
 	const movie: TMDBMovie = await response.json();
-	console.log(movie);
 
 	if (weights.length < 1) {
 		throw console.error('No weights found');

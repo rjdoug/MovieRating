@@ -16,14 +16,15 @@
 	{#if data.ratings}
 		{#each data.ratings as rating}
 			<rating-row>
-				<rating-title>{rating.title}</rating-title>
+				<rating-title>{rating.movie.title}</rating-title>
 				<rating-date>
 					{new Date(rating.date).getDate()}/{new Date(rating.date).getMonth()}/{new Date(
 						rating.date
 					).getFullYear()}
 				</rating-date>
 				<rating-value>
-					This is where you're up to. You should probably store the calculated rating as well
+					Make this into a grid like the other page and have the ratings over top with the spotify
+					grey out bs
 				</rating-value>
 			</rating-row>
 		{/each}
