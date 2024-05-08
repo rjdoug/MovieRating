@@ -16,32 +16,32 @@
 		total_results: 0
 	};
 
-
 	// Calls searchMovie when Enter key is hit
 	async function onSearchKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {
 			movieList = await searchMovies(searchValue);
+			console.log(movieList);
 		}
 	}
 
 	/**
 	 * Searches for media against TMDB and updates movieList
-	 * 
-	 * @param {string }query The search string
-	 * @returns {TMDBMovieList} Movie list 
+	 *
+	 * @param {string} query The search string
+	 * @returns {TMDBMovieList} Movie list
 	 */
 	async function searchMovies(query: string) {
 		const res = await fetch(`/movies?query=${encodeURIComponent(query)}`);
 		const mList: TMDBMovieList = await res.json();
 		return mList;
 	}
-
-	
 </script>
 
 <Search bind:value={searchValue} on:keyup={(event) => onSearchKeyUp(event)} />
 <movie-table>
 	{#each movieList.results as movie}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<movie-poster on:click={() => goto(`/ratings/${movie.id}/edit`)}>
 			<img class="poster" src={buildTMDBImgUrl(movie.poster_path)} alt={movie.title + ' poster'} />
 		</movie-poster>
@@ -49,8 +49,6 @@
 </movie-table>
 
 <style>
-	
-
 	movie-table {
 		display: flex;
 		width: 100%;

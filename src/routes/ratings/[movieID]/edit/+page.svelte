@@ -10,7 +10,7 @@
 	// data.ratings - ratings.json
 	export let data;
 
-	// These indexes are used to keep track of what category rating we are up to
+	// These indexes are used to keep track of what rating category we are up to
 	let currentIndex = 0;
 	let maxIndex = data.ratings.length - 1;
 	let selectedIndex = 0;
@@ -26,32 +26,11 @@
 	// Data for current category we are up to
 	$: category = data.ratings[currentIndex];
 
-	let searchValue = 'Rick and Morty';
-	let movieList: TMDBMovieList = {
-		page: 1,
-		results: [],
-		total_pages: 1,
-		total_results: 0
-	};
-
 	// Typecasting being a prick in svelte, so placing function here
 	function onKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {
 			goto(data.url?.href + '/new');
 		}
-	}
-
-	async function onSearchKeyUp(event: KeyboardEvent) {
-		if (event.key == 'Enter') {
-			await searchMovies(searchValue);
-		}
-	}
-
-	async function searchMovies(query: string) {
-		const res = await fetch(`/movies?query=${encodeURIComponent(query)}`);
-		const mList: TMDBMovieList = await res.json();
-		movieList = mList;
-		console.log(movieList);
 	}
 
 	/**
@@ -80,6 +59,7 @@
 				// Otherwise you need to have a way to select movie and get id that way.
 				const postRating: PostRating = {
 					...ratings,
+					movieID: data.movieID,
 					overallRating: overallRating
 				};
 

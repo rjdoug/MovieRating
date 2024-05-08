@@ -52,7 +52,7 @@ export type Categories = {
 export type PostRating = Categories & {
 	userID?: number;
 	overallRating: number;
-	movieID?: number;
+	movieID: number;
 };
 
 export type TMDBMovieList = {

@@ -4,7 +4,7 @@ import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { Weight } from '$lib/types';
 
-export const load: PageServerLoad = async ({ fetch }) => {
+export const load: PageServerLoad = async ({ fetch, params }) => {
 	const response = await fetch(`/api/${get(userID)}/weights`);
 	const weights: Weight[] = await response.json();
 
@@ -14,8 +14,11 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		console.error('More that 1 lot of weightings found. Selecting 0 index');
 	}
 
+	if (!parseInt(params.movieID)) throw console.error('Parsing movieID');
+
 	return {
 		ratings,
-		weights: weights[0]
+		weights: weights[0],
+		movieID: parseInt(params.movieID)
 	};
 };
