@@ -2,11 +2,15 @@ import type { PageServerLoad } from './$types';
 import ratings from '$lib/data/ratings.json';
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
-import type { Weight } from '$lib/types';
+import type { TMDBMovie, Weight } from '$lib/types';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
-	const response = await fetch(`/api/${get(userID)}/weights`);
+	let response = await fetch(`/api/${get(userID)}/weights`);
 	const weights: Weight[] = await response.json();
+
+	response = await fetch(`/movies/${params.movieID}`);
+	const movie: TMDBMovie = await response.json();
+	console.log(movie);
 
 	if (weights.length < 1) {
 		throw console.error('No weights found');
@@ -19,6 +23,6 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 	return {
 		ratings,
 		weights: weights[0],
-		movieID: parseInt(params.movieID)
+		movie: movie
 	};
 };

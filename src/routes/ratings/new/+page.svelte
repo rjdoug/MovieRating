@@ -5,10 +5,7 @@
 	import { Search } from 'carbon-components-svelte';
 	import 'iconify-icon';
 
-	// data.ratings - ratings.json
-	export let data;
-
-	let searchValue = 'Rick and Morty';
+	let searchValue = '';
 	let movieList: TMDBMovieList = {
 		page: 1,
 		results: [],

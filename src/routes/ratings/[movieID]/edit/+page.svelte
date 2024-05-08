@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import SimpleButton from '$lib/SimpleButton.svelte';
 	import { userID } from '$lib/stores.js';
-	import type { Categories, PostRating, TMDBMovieList } from '$lib/types.js';
+	import type { Categories, PostRating } from '$lib/types.js';
 	import { calcOverallRating, createEmptyRating } from '$lib/utils.js';
 	import 'iconify-icon';
 	import { get } from 'svelte/store';
@@ -37,7 +37,7 @@
 	 * Appends the current selected option on event into ratings variable. If final category then calculate overall rating and post
 	 * @param event
 	 */
-	function handleSubmit(event: Event) {
+	async function handleSubmit(event: Event) {
 		try {
 			event.preventDefault();
 			const formData = new FormData(event.target as HTMLFormElement);
@@ -59,11 +59,12 @@
 				// Otherwise you need to have a way to select movie and get id that way.
 				const postRating: PostRating = {
 					...ratings,
-					movieID: data.movieID,
+					movieID: data.movie.id,
 					overallRating: overallRating
 				};
 
-				addRating(postRating);
+				await addRating(postRating);
+				completed = true;
 			}
 
 			// reset options selection for next page
@@ -119,7 +120,7 @@
 	<!-- I think we should just have a separate page where we get query the db to get the data out. Too complex
 	too try pulling the data out of our poorly formed data structures -->
 	<completed-card>
-		<completed-message>Rating for *movie* successfully added</completed-message>
+		<completed-message>Rating for '{data.movie.title}' successfully added</completed-message>
 		<completed-icon>
 			<iconify-icon class="check-one" icon="icon-park-outline:check-one"></iconify-icon>
 		</completed-icon>
@@ -206,6 +207,7 @@
 	completed-message {
 		font-weight: bold;
 		margin-bottom: 20px;
+		text-align: center;
 	}
 
 	completed-icon {
