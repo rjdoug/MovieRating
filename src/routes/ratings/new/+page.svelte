@@ -27,7 +27,7 @@
 	 * @returns {TMDBMovieList} Movie list
 	 */
 	async function searchMovies(query: string) {
-		const res = await fetch(`/movies?query=${encodeURIComponent(query)}`);
+		const res = await fetch(`/api/movies?query=${encodeURIComponent(query)}`);
 		const mList: TMDBMovieList = await res.json();
 		return mList;
 	}

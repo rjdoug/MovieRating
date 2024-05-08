@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 
 		const ratingsAndMovie: RatingAndMovie[] = await Promise.all(
 			ratings.map(async (rating) => {
-				const response = await fetch(`/movies/${rating.movieID}`);
+				const response = await fetch(`/api/movies/${rating.movieID}`);
 				if (!response.ok) console.error(`cannot find movie: ${rating.movieID}`);
 
 				const movie: TMDBMovie = await response.json();

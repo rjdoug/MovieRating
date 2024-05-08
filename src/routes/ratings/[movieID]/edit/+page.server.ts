@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 	let response = await fetch(`/api/${get(userID)}/weights`);
 	const weights: Weight[] = await response.json();
 
-	response = await fetch(`/movies/${params.movieID}`);
+	response = await fetch(`/api/movies/${params.movieID}`);
 	const movie: TMDBMovie = await response.json();
 
 	if (weights.length < 1) {
