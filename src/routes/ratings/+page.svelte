@@ -34,7 +34,9 @@
 	{/if}
 </rating-table>
 
-<SimpleButton onClick={() => goto(data.url?.href + '/new')} {onKeyUp}>New Rating</SimpleButton>
+<button-wrap>
+	<SimpleButton onClick={() => goto(data.url?.href + '/new')} {onKeyUp}>New Rating</SimpleButton>
+</button-wrap>
 
 <style>
 	rating-table {
@@ -50,6 +52,7 @@
 		width: 185px;
 		display: flex;
 		flex-direction: column;
+		margin-bottom: 2rem;
 	}
 
 	.poster-img {
@@ -104,5 +107,9 @@
 
 	movie-title:hover {
 		opacity: 1;
+	}
+
+	button-wrap {
+		margin-top: 2rem;
 	}
 </style>
