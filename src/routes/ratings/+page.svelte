@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import SimpleButton from '$lib/SimpleButton.svelte';
+	import { buildTMDBImgUrl } from '$lib/utils.js';
 
 	export let data;
 
@@ -15,18 +16,17 @@
 <rating-table>
 	{#if data.ratings}
 		{#each data.ratings as rating}
-			<rating-row>
-				<rating-title>{rating.movie.title}</rating-title>
-				<rating-date>
-					{new Date(rating.date).getDate()}/{new Date(rating.date).getMonth()}/{new Date(
-						rating.date
-					).getFullYear()}
-				</rating-date>
-				<rating-value>
-					Make this into a grid like the other page and have the ratings over top with the spotify
-					grey out bs
-				</rating-value>
-			</rating-row>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<movie-poster on:click={() => goto(`/ratings/${rating.movieID}/edit`)}>
+				<img
+					class="poster"
+					src={buildTMDBImgUrl(rating.movie.poster_path)}
+					alt={rating.movie.title + ' poster'}
+				/>
+
+				<total-rating>{rating.totalRating}/5</total-rating>
+			</movie-poster>
 		{/each}
 	{/if}
 </rating-table>
@@ -34,4 +34,46 @@
 <SimpleButton onClick={() => goto(data.url?.href + '/new')} {onKeyUp}>New Rating</SimpleButton>
 
 <style>
+	rating-table {
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+		align-items: start;
+		gap: 0.5rem;
+		margin-top: 1rem;
+	}
+
+	movie-poster {
+		/* Duplicating width and height so when there's an empty img then it follow constraints */
+		height: 278px;
+		width: 185px;
+	}
+
+	.poster {
+		/* Force img to fit to 278px - Mostly the standard, but will zoom anything that doesn't fit */
+		object-fit: cover;
+		height: 278px;
+		width: 185px;
+	}
+
+	total-rating {
+		position: relative;
+		display: flex;
+		opacity: 0;
+		/* 100% causes little line where it doesn't cover */
+		top: -101%;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.4);
+		color: white;
+		font-size: 32px;
+		align-items: center;
+		justify-content: center;
+		transition: opacity 0.5s ease;
+		font-weight: bold;
+	}
+
+	total-rating:hover {
+		opacity: 1;
+	}
 </style>
