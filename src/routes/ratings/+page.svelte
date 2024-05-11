@@ -20,7 +20,7 @@
 		{#each data.ratings as rating}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<movie-poster on:click={() => goto(`/ratings/${rating.movieID}/edit`)}>
+			<movie-poster on:click={() => goto(`/ratings/${rating.movieID}`)}>
 				<img
 					class="poster-img"
 					src={buildTMDBImgUrl(rating.movie.poster_path)}
@@ -28,7 +28,10 @@
 				/>
 
 				<total-rating>{rating.totalRating}/5</total-rating>
-				<movie-title>{rating.movie.title}</movie-title>
+
+				<poster-overlay>
+					<movie-title>{rating.movie.title}</movie-title>
+				</poster-overlay>
 			</movie-poster>
 		{/each}
 	{/if}
@@ -66,46 +69,34 @@
 		display: flex;
 		background-color: rgba(0, 0, 0, 0.4);
 		color: white;
-		font-size: 32px;
+		font-size: 26px;
 		align-items: center;
 		justify-content: center;
 		font-weight: bold;
 	}
 
-	/* total-rating {
-	position: relative;
-		display: flex;
-		opacity: 0;
-		top: -101%;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.4);
-		color: white;
-		font-size: 32px;
-		align-items: center;
-		justify-content: center;
-		transition: opacity 0.5s ease;
-		font-weight: bold;
-	} */
-
-	movie-title {
-		font-size: 16px;
-		font-weight: bold;
+	poster-overlay {
 		transition: opacity 0.5s ease;
 		background-color: rgba(0, 0, 0, 0.5);
 		opacity: 0;
-		color: white;
 		padding-top: 1rem;
-		display: flex; /* Inherit flex display from parent */
+		display: flex;
 		justify-content: center;
-		text-align: center;
 		/* align with top of poster */
-		margin-top: -310px;
+		margin-top: -304px;
 		height: 278px;
 		width: 100%;
 	}
 
-	movie-title:hover {
+	movie-title {
+		color: white;
+		font-weight: bold;
+		font-size: 18px;
+		text-align: center;
+		padding: 0 0.5rem;
+	}
+
+	poster-overlay:hover {
 		opacity: 1;
 	}
 
