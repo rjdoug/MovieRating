@@ -1,4 +1,5 @@
 // combination of movie and rating as found in sql
+// Holds a label and value. Ideally would build type from the json file, but happy to duplicate for now
 export type Rating = {
 	userID: number;
 	movieID: number;
@@ -52,10 +53,12 @@ export type PostRating = Categories & {
 	movieID: number;
 };
 
+// Combination of Rating and TMDB movie. Useful when displaying rating data
 export type RatingAndMovie = Rating & {
 	movie: TMDBMovie;
 };
 
+// Object returned when requesting a list of movies from TMDB
 export type TMDBMovieList = {
 	page: number;
 	results: TMDBMovie[];
@@ -63,6 +66,7 @@ export type TMDBMovieList = {
 	total_results: number;
 };
 
+// Object returned from TMDB when requesting a movie
 export type TMDBMovie = {
 	adult: boolean;
 	backdrop_path: string;

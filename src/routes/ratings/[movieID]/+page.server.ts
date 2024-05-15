@@ -2,6 +2,7 @@ import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
 import type { Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
+import categories from '$lib/data/ratings.json';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
 	try {
@@ -25,7 +26,13 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 
 		const movie: TMDBMovie = await response.json();
 
-		return { ...ratings[0], movie } as RatingAndMovie;
+		return {
+			rating: {
+				...ratings[0],
+				movie
+			} as RatingAndMovie,
+			categories
+		};
 	} catch (error: unknown) {
 		console.error('Error fetching rating:', error);
 		throw error;
