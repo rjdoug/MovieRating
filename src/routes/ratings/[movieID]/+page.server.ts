@@ -1,7 +1,7 @@
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
-import type { Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
+import type { DB_Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
 import categories from '$lib/data/ratings.json';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 			throw new Error(`Failed to fetch rating: ${response.statusText}`);
 		}
 
-		const ratings: Rating[] = await response.json();
+		const ratings: DB_Rating[] = await response.json();
 		if (ratings.length > 1)
 			console.error(
 				`Was meant to receive a single rating, but got multiple. User: ${uid}, Movie: ${params.movieID}`

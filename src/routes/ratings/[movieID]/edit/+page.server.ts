@@ -2,11 +2,11 @@ import type { PageServerLoad } from './$types';
 import ratings from '$lib/data/ratings.json';
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
-import type { TMDBMovie, Weight } from '$lib/types';
+import type { TMDBMovie, DB_Weight } from '$lib/types';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
 	let response = await fetch(`/api/${get(userID)}/weights`);
-	const weights: Weight[] = await response.json();
+	const weights: DB_Weight[] = await response.json();
 
 	response = await fetch(`/api/movies/${params.movieID}`);
 	const movie: TMDBMovie = await response.json();

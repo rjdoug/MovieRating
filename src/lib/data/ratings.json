@@ -6,7 +6,7 @@
 		"description": "Did this movie feel totally new and exciting, or like a recycled version of something you've seen before? Think about how fresh it felt compared to other movies in its genre. Did the story take a familiar idea and spin it in a cool way, or play it completely safe?  Even if the basic idea wasn't groundbreaking, did the movie surprise you with how it was done?",
 		"weight": 10,
 		"options": [
-			{ "label": "Remake or fresh concept?", "value": 1 },
+			{ "label": "Stolen or overused concept?", "value": 1 },
 			{ "label": "Familiar but engaging?  Or a bit derivative?", "value": 2 },
 			{ "label": "Some unique ideas, but predictable overall?", "value": 3 },
 			{ "label": "Introduces new elements that keep you interested?", "value": 4 },

@@ -1,6 +1,6 @@
 // combination of movie and rating as found in sql
 // Holds a label and value. Ideally would build type from the json file, but happy to duplicate for now
-export type Rating = {
+export type DB_Rating = {
 	userID: number;
 	movieID: number;
 	date: Date;
@@ -16,9 +16,30 @@ export type Rating = {
 	totalRating: number;
 };
 
+type KeyVal = {
+	label: string;
+	value: any;
+};
+
+export type Rating = {
+	userID: number;
+	movieID: number;
+	date: Date;
+	originality: KeyVal;
+	acting: KeyVal;
+	storyline: KeyVal;
+	pacing: KeyVal;
+	soundtrack: KeyVal;
+	replay: KeyVal;
+	cinematography: KeyVal;
+	emotionalImpact: KeyVal;
+	enjoyment: KeyVal;
+	totalRating: KeyVal;
+};
+
 // weight as found in db
 // TODO: Update id to just be userID
-export type Weight = {
+export type DB_Weight = {
 	id: number;
 	userID: number;
 	originality: number;
@@ -31,6 +52,8 @@ export type Weight = {
 	emotionalImpact: number;
 	enjoyment: number;
 };
+
+// type RatingLabel = "Originality" | "Acting" | "Storyline" |
 
 // Categories used to rate movies
 // TODO: Categories could probably dissapear and be replaced with strings or something
@@ -54,7 +77,7 @@ export type PostRating = Categories & {
 };
 
 // Combination of Rating and TMDB movie. Useful when displaying rating data
-export type RatingAndMovie = Rating & {
+export type RatingAndMovie = DB_Rating & {
 	movie: TMDBMovie;
 };
 

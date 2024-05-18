@@ -1,7 +1,7 @@
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
-import type { Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
+import type { DB_Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	try {
@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			throw new Error(`Failed to fetch ratings: ${response.statusText}`);
 		}
 
-		const ratings: Rating[] = await response.json();
+		const ratings: DB_Rating[] = await response.json();
 
 		const ratingsAndMovie: RatingAndMovie[] = await Promise.all(
 			ratings.map(async (rating) => {
