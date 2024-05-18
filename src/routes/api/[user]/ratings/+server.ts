@@ -1,4 +1,4 @@
-import type { RequestHandler } from '@sveltejs/kit';
+import { json, type RequestHandler } from '@sveltejs/kit';
 import { mysqlconn } from '$lib/db/sql';
 import type { PostRating } from '$lib/types';
 import { get } from 'svelte/store';
@@ -13,10 +13,7 @@ export const GET: RequestHandler = async ({ params }) => {
 `,
 		[params.user]
 	);
-	// Assuming rows contains the actual data
-	return new Response(JSON.stringify(rows), {
-		headers: { 'Content-Type': 'application/json' }
-	});
+	return json(rows);
 };
 
 export const POST: RequestHandler = async ({ request }) => {

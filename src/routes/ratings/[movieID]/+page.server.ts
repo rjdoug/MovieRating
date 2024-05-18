@@ -1,8 +1,9 @@
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
-import type { Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
+import type { DB_Rating, Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
 import categories from '$lib/data/ratings.json';
+import { transformRating } from '$lib/utils';
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
 	try {
@@ -13,18 +14,22 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 			throw new Error(`Failed to fetch rating: ${response.statusText}`);
 		}
 
-		const ratings: Rating[] = await response.json();
-		if (ratings.length > 1)
+		const dbRatings: DB_Rating[] = await response.json();
+		if (dbRatings.length > 1)
 			console.error(
 				`Was meant to receive a single rating, but got multiple. User: ${uid}, Movie: ${params.movieID}`
 			);
-		if (ratings.length < 1)
+		if (dbRatings.length < 1)
 			throw Error(`No rating returned for user: ${uid} and movie ${params.movieID}`);
 
-		response = await fetch(`/api/movies/${ratings[0].movieID}`);
-		if (!response.ok) throw new Error(`cannot find movie: ${ratings[0].movieID}`);
+		//  Get movie details of rating
+		response = await fetch(`/api/movies/${dbRatings[0].movieID}`);
+		if (!response.ok) throw new Error(`cannot find movie: ${dbRatings[0].movieID}`);
 
 		const movie: TMDBMovie = await response.json();
+
+		// Transform rating into frontend format
+		const ratings = await transformRating(dbRatings);
 
 		return {
 			rating: {

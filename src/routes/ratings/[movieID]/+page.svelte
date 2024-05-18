@@ -1,22 +1,9 @@
 <script lang="ts">
-	import type { Categories, Rating } from '$lib/types.js';
-	import { buildTMDBImgUrl, categories } from '$lib/utils';
+	import { buildTMDBImgUrl, categories, getRatingCategoryData } from '$lib/utils';
 
 	export let data;
-	export const getRatingSubset = (
-		rating: Rating,
-		categories: (keyof Categories)[]
-	): Partial<Rating> => {
-		const filteredRating: Partial<Rating> = {};
-		for (const category of categories) {
-			if (category in rating) {
-				filteredRating[category] = rating[category];
-			}
-		}
-		return filteredRating;
-	};
 
-	const ratingCategories = getRatingSubset(data.rating, categories);
+	const ratingCategories = getRatingCategoryData(data.rating, categories);
 </script>
 
 <h1>{data.rating.movie.title}</h1>
@@ -33,10 +20,10 @@
 		{#each Object.entries(ratingCategories) as [key, value]}
 			<category-detail>
 				<category-label>
-					{key}
+					{value.label}
 				</category-label>
 				<category-value>
-					{value}
+					{value.value}
 				</category-value>
 			</category-detail>
 		{/each}

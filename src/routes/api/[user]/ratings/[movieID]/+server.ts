@@ -10,6 +10,5 @@ export const GET: RequestHandler = async ({ params }) => {
 `,
 		[params.user, params.movieID]
 	);
-
 	return json(rows);
 };

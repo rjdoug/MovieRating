@@ -11,8 +11,6 @@
 			goto(data.url?.href + '/new');
 		}
 	}
-
-	console.log(data.ratings);
 </script>
 
 <rating-table>
@@ -27,7 +25,7 @@
 					alt={rating.movie.title + ' poster'}
 				/>
 
-				<total-rating>{rating.totalRating}/5</total-rating>
+				<total-rating>{rating.totalRating.value}/5</total-rating>
 
 				<poster-overlay>
 					<movie-title>{rating.movie.title}</movie-title>

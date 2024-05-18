@@ -136,3 +136,22 @@ export async function transformRating(dbRatings: DB_Rating[]): Promise<Rating[]>
 
 	return ratings;
 }
+
+/**
+ * Returns categories specified from rating
+ * @param rating Rating to extract category keys from
+ * @param categories Category keys that are to be extracted
+ */
+
+export function getRatingCategoryData<K extends keyof Rating>(
+	rating: Rating,
+	categories: K[]
+): Pick<Rating, K> {
+	const filteredRating: Pick<Rating, K> = {} as Pick<Rating, K>;
+	for (const category of categories) {
+		if (category in rating) {
+			filteredRating[category] = rating[category];
+		}
+	}
+	return filteredRating;
+}
