@@ -80,52 +80,58 @@ async function getCategoryJSON() {
 }
 
 // Function to transform DB_Rating to Rating type with type assertion
-export async function transformRating(data: DB_Rating): Promise<Rating> {
+// This is just so shit for optimization xD
+export async function transformRating(dbRatings: DB_Rating[]): Promise<Rating[]> {
 	const json_categories = await getCategoryJSON();
-	const rating: Rating = {
-		userID: data.userID,
-		movieID: data.movieID,
-		date: data.date,
-		originality: {
-			label: json_categories.find((x) => x.key == 'originality')?.category || 'unknown',
-			value: data.originality
-		},
-		acting: {
-			label: json_categories.find((x) => x.key == 'acting')?.category || 'unknown',
-			value: data.acting
-		},
-		storyline: {
-			label: json_categories.find((x) => x.key == 'storyline')?.category || 'unknown',
-			value: data.storyline
-		},
-		pacing: {
-			label: json_categories.find((x) => x.key == 'pacing')?.category || 'unknown',
-			value: data.pacing
-		},
-		soundtrack: {
-			label: json_categories.find((x) => x.key == 'soundtrack')?.category || 'unknown',
-			value: data.soundtrack
-		},
-		replay: {
-			label: json_categories.find((x) => x.key == 'replay')?.category || 'unknown',
-			value: data.replay
-		},
-		cinematography: {
-			label: json_categories.find((x) => x.key == 'cinematography')?.category || 'unknown',
-			value: data.cinematography
-		},
-		emotionalImpact: {
-			label: json_categories.find((x) => x.key == 'emotionalImpact')?.category || 'unknown',
-			value: data.emotionalImpact
-		},
-		enjoyment: {
-			label: json_categories.find((x) => x.key == 'enjoyment')?.category || 'unknown',
-			value: data.enjoyment
-		},
-		totalRating: {
-			label: 'Total Rating',
-			value: data.totalRating
-		}
-	};
-	return rating;
+	const ratings: Rating[] = [];
+	for (let r of dbRatings) {
+		const rating: Rating = {
+			userID: r.userID,
+			movieID: r.movieID,
+			date: r.date,
+			originality: {
+				label: json_categories.find((x) => x.key == 'originality')?.category || 'unknown',
+				value: r.originality
+			},
+			acting: {
+				label: json_categories.find((x) => x.key == 'acting')?.category || 'unknown',
+				value: r.acting
+			},
+			storyline: {
+				label: json_categories.find((x) => x.key == 'storyline')?.category || 'unknown',
+				value: r.storyline
+			},
+			pacing: {
+				label: json_categories.find((x) => x.key == 'pacing')?.category || 'unknown',
+				value: r.pacing
+			},
+			soundtrack: {
+				label: json_categories.find((x) => x.key == 'soundtrack')?.category || 'unknown',
+				value: r.soundtrack
+			},
+			replay: {
+				label: json_categories.find((x) => x.key == 'replay')?.category || 'unknown',
+				value: r.replay
+			},
+			cinematography: {
+				label: json_categories.find((x) => x.key == 'cinematography')?.category || 'unknown',
+				value: r.cinematography
+			},
+			emotionalImpact: {
+				label: json_categories.find((x) => x.key == 'emotionalImpact')?.category || 'unknown',
+				value: r.emotionalImpact
+			},
+			enjoyment: {
+				label: json_categories.find((x) => x.key == 'enjoyment')?.category || 'unknown',
+				value: r.enjoyment
+			},
+			totalRating: {
+				label: 'Total Rating',
+				value: r.totalRating
+			}
+		};
+		ratings.push(rating);
+	}
+
+	return ratings;
 }

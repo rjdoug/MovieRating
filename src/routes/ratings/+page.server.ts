@@ -1,8 +1,8 @@
 import { userID } from '$lib/stores';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
-import type { DB_Rating, Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
-
+import type { DB_Rating, RatingAndMovie, TMDBMovie } from '$lib/types';
+import { transformRating } from '$lib/utils';
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	try {
@@ -13,16 +13,9 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			throw new Error(`Failed to fetch ratings: ${response.statusText}`);
 		}
 
-		const ratings: Rating[] = await response.json();
+		const dbRatings: DB_Rating[] = await response.json();
 
-		// convert DB_Rating to Rating
-		// Export to global function
-
-		// Use categories type to pull out categories
-
-		// Create new object using label from json and value of category
-
-
+		const ratings = await transformRating(dbRatings);
 
 		// Merge rating and movie ito one
 		const ratingsAndMovie: RatingAndMovie[] = await Promise.all(
