@@ -2,6 +2,7 @@
 // TODO: I don't like the fact that if a key changes or is added we need to update
 
 import type { Categories, DB_Rating, DB_Weight, JSON_Category, Rating } from './types';
+import json_categories from './data/ratings.json';
 
 // here and in the json an both are being used to access keys on different occasions
 export const categories: (keyof Categories)[] = [
@@ -56,33 +57,33 @@ export function buildTMDBImgUrl(imgPath: string, width?: number) {
 	return `https://image.tmdb.org/t/p/w${width}` + imgPath;
 }
 
-async function getCategoryJSON() {
-	const response = await fetch('$lib/data/ratings.json');
-	const data = await response.json();
+// TODO: Use hooks or something
+// async function getCategoryJSON() {
+// 	const response = await fetch('');
+// 	const data = await response.json();
 
-	// Type Assertion so the IDE doesn't cry - not happy about inference
-	const categories: JSON_Category[] = data as JSON_Category[];
+// 	// Type Assertion so the IDE doesn't cry - not happy about inference
+// 	const categories: JSON_Category[] = data as JSON_Category[];
 
-	// Loop through each category and validate properties
-	for (const category of categories) {
-		if (typeof category.id !== 'number' || category.id <= 0) {
-			console.error(`Error: category.id must be a positive number (found: ${category.id})`);
-		}
-		if (typeof category.category !== 'string' || category.category.length === 0) {
-			console.error(
-				`Error: category.category must be a non-empty string (found: ${category.category})`
-			);
-		}
-		// TODO: Add similar checks for other properties (key, description, weight, options)
-	}
+// 	// Loop through each category and validate properties
+// 	for (const category of categories) {
+// 		if (typeof category.id !== 'number' || category.id <= 0) {
+// 			console.error(`Error: category.id must be a positive number (found: ${category.id})`);
+// 		}
+// 		if (typeof category.category !== 'string' || category.category.length === 0) {
+// 			console.error(
+// 				`Error: category.category must be a non-empty string (found: ${category.category})`
+// 			);
+// 		}
+// 		// TODO: Add similar checks for other properties (key, description, weight, options)
+// 	}
 
-	return categories;
-}
+// 	return categories;
+// }
 
 // Function to transform DB_Rating to Rating type with type assertion
 // This is just so shit for optimization xD
 export async function transformRating(dbRatings: DB_Rating[]): Promise<Rating[]> {
-	const json_categories = await getCategoryJSON();
 	const ratings: Rating[] = [];
 	for (let r of dbRatings) {
 		const rating: Rating = {
