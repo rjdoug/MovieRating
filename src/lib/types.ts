@@ -1,5 +1,22 @@
+export type JSON_Category = {
+	id: number;
+	// Defines the category in a displayable fashion
+	category: string;
+	// key to be used in objects - unique
+	key: string;
+	// Prompt to help users understand what the category is about
+	description: string;
+	// The weighting of the category when the total is calculated
+	// TODO: remove once weights have been implemented in the database
+	weight: number;
+	options: {
+		label: string;
+		value: number;
+	}[];
+};
+
 // combination of movie and rating as found in sql
-// Holds a label and value. Ideally would build type from the json file, but happy to duplicate for now
+// Holds a label and value. Ideally would build type from the json file before ts is compiled, but happy to duplicate for now
 export type DB_Rating = {
 	userID: number;
 	movieID: number;
@@ -77,7 +94,7 @@ export type PostRating = Categories & {
 };
 
 // Combination of Rating and TMDB movie. Useful when displaying rating data
-export type RatingAndMovie = DB_Rating & {
+export type RatingAndMovie = Rating & {
 	movie: TMDBMovie;
 };
 

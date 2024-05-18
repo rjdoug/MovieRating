@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { Categories, DB_Rating } from '$lib/types.js';
+	import type { Categories, Rating } from '$lib/types.js';
 	import { buildTMDBImgUrl, categories } from '$lib/utils';
 
 	export let data;
 	export const getRatingSubset = (
-		rating: DB_Rating,
+		rating: Rating,
 		categories: (keyof Categories)[]
-	): Partial<DB_Rating> => {
-		const filteredRating: Partial<DB_Rating> = {};
+	): Partial<Rating> => {
+		const filteredRating: Partial<Rating> = {};
 		for (const category of categories) {
 			if (category in rating) {
 				filteredRating[category] = rating[category];
