@@ -1,12 +1,36 @@
 <script lang="ts">
+	import { userID } from '$lib/stores.js';
 	import { buildTMDBImgUrl, categories, getRatingCategoryData } from '$lib/utils';
+	import { Button } from 'carbon-components-svelte';
+	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
+	import { get } from 'svelte/store';
+	import { DELETE } from '../../api/[user]/ratings/[movieID]/+server.js';
 
 	export let data;
 
 	const ratingCategories = getRatingCategoryData(data.rating, categories);
+
+	async function deleteRating() {
+		const uid = get(userID);
+		const res = await fetch(`/api/${uid}/ratings/${data.rating.movieID}`, {
+			method: 'DELETE'
+		});
+		const msg = await res.json();
+		console.log(msg);
+	}
 </script>
 
-<h1>{data.rating.movie.title}</h1>
+<header>
+	<h1>{data.rating.movie.title}</h1>
+	<delete-button>
+		<Button
+			kind="danger-tertiary"
+			iconDescription="Delete"
+			icon={TrashCan}
+			on:click={async () => await deleteRating()}
+		/>
+	</delete-button>
+</header>
 <main>
 	<movie-poster>
 		<img
@@ -39,6 +63,26 @@
 </main>
 
 <style>
+	header {
+		position: relative;
+		display: flex;
+		width: 100%;
+		align-items: center;
+	}
+
+	delete-button {
+		position: absolute;
+		right: 10px;
+		/* Center vertically */
+		top: 50%;
+		/* Account for button height */
+		transform: translateY(-50%);
+	}
+
+	h1 {
+		flex: 1;
+		text-align: center;
+	}
 	main {
 		display: flex;
 		width: 40%;
