@@ -5,6 +5,7 @@
 
 	export let data;
 
+
 	// Typecasting being a prick in svelte, so placing function here
 	function onKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {

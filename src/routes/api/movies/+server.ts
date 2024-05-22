@@ -15,8 +15,8 @@ export const GET: RequestHandler = async ({ url }) => {
 		`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=e3c9b3868d5bf23f338e170118a888a0`,
 		options
 	);
+
 	const movies = await res.json();
-	
 
 	return json(movies);
 };

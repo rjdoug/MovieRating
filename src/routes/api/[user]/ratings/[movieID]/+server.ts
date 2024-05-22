@@ -25,7 +25,7 @@ export const DELETE: RequestHandler = async ({ params }) => {
 			throw new Error(`No ratings found for user ${params.user} and movie ${params.movieID}`);
 		}
 
-		return new Response('Sucessfully deleted rating', { status: 204 });
+		return new Response(null, { status: 200 });
 	} catch (error: unknown) {
 		console.error('Error deleting rating:', error);
 		return new Response(null, { status: 500, statusText: 'Internal Server Error' });

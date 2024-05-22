@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { userID } from '$lib/stores.js';
 	import { buildTMDBImgUrl, categories, getRatingCategoryData } from '$lib/utils';
+	import { error } from '@sveltejs/kit';
 	import { Button } from 'carbon-components-svelte';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 	import { get } from 'svelte/store';
-	import { DELETE } from '../../api/[user]/ratings/[movieID]/+server.js';
 
 	export let data;
 
@@ -15,8 +15,12 @@
 		const res = await fetch(`/api/${uid}/ratings/${data.rating.movieID}`, {
 			method: 'DELETE'
 		});
-		const msg = await res.json();
-		console.log(msg);
+		if (!res.ok) {
+			console.error(res);
+			error(res.status, {
+				message: 'There was a problem deleting the rating.'
+			});
+		}
 	}
 </script>
 
