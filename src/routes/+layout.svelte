@@ -13,9 +13,9 @@
 		<li>
 			<a href="/" class={data.path[0] == '' ? 'selected' : ''}>Home</a>
 		</li>
-		<li>
+		<!-- <li>
 			<a href="/ratings" class={data.path[0] == 'ratings' ? 'selected' : ''}>Ratings</a>
-		</li>
+		</li> -->
 	</ul>
 </nav>
 
