@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { userID } from '$lib/stores.js';
 	import { buildTMDBImgUrl, categories, getRatingCategoryData } from '$lib/utils';
-	import { error } from '@sveltejs/kit';
+	import { error, redirect } from '@sveltejs/kit';
 	import { Button } from 'carbon-components-svelte';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 	import { get } from 'svelte/store';
@@ -31,7 +32,11 @@
 			kind="danger-tertiary"
 			iconDescription="Delete"
 			icon={TrashCan}
-			on:click={async () => await deleteRating()}
+			on:click={async () => {
+				await deleteRating();
+				console.log(data.url.host);
+				goto('/');
+			}}
 		/>
 	</delete-button>
 </header>
