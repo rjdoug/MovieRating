@@ -5,6 +5,7 @@
 
 	export let data;
 
+	console.log(data.ratings);
 
 	// Typecasting being a prick in svelte, so placing function here
 	function onKeyUp(event: KeyboardEvent) {
@@ -14,47 +15,71 @@
 	}
 </script>
 
+<h1>My Ratings</h1>
 <rating-table>
-	{#if data.ratings}
-		{#each data.ratings as rating}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<movie-poster on:click={() => goto(`/ratings/${rating.movieID}`)}>
-				<img
-					class="poster-img"
-					src={buildTMDBImgUrl(rating.movie.poster_path)}
-					alt={rating.movie.title + ' poster'}
-				/>
+	{#each data.ratings as rating}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<movie-poster on:click={() => goto(`/ratings/${rating.movieID}`)}>
+			<img
+				class="poster-img"
+				src={buildTMDBImgUrl(rating.movie.poster_path)}
+				alt={rating.movie.title + ' poster'}
+			/>
 
-				<total-rating>{rating.totalRating.value}/5</total-rating>
+			<total-rating>{rating.totalRating.value}/5</total-rating>
 
-				<poster-overlay>
-					<movie-title>{rating.movie.title}</movie-title>
-				</poster-overlay>
-			</movie-poster>
-		{/each}
-	{/if}
+			<poster-overlay>
+				<movie-title>{rating.movie.title}</movie-title>
+			</poster-overlay>
+		</movie-poster>
+	{:else}
+		<empty-table>
+			<h2>No ratings completed</h2>
+			<p>Add a new rating to begin</p>
+		</empty-table>
+	{/each}
 </rating-table>
 
 <button-wrap>
-	<SimpleButton onClick={() => goto(data.url?.href + 'ratings/new')} {onKeyUp}>New Rating</SimpleButton>
+	<SimpleButton onClick={() => goto(data.url?.href + 'ratings/new')} {onKeyUp}
+		>New Rating</SimpleButton
+	>
 </button-wrap>
 
 <style>
+	h1 {
+		font-size: 3.5rem;
+		font-weight: 600;
+	}
 	rating-table {
 		display: flex;
 		width: 100%;
 		flex-wrap: wrap;
 		align-items: start;
-		gap: 0.5rem;
+		gap: 16px;
 		margin-top: 1rem;
+		min-height: 35vh;
+		/* -1rem on bottom to offset the movie poster margin for last row */
+		padding: 1rem;
 	}
 
 	movie-poster {
-		width: 185px;
 		display: flex;
 		flex-direction: column;
+		position: relative;
+
+		width: 185px;
+		border-radius: 5px;
 		margin-bottom: 2rem;
+
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
+		transition: box-shadow 0.3s ease;
+	}
+
+	movie-poster:hover {
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 	}
 
 	.poster-img {
@@ -75,28 +100,41 @@
 	}
 
 	poster-overlay {
+		display: flex;
+		position: absolute;
+		justify-content: center;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		padding-top: 1rem;
+
 		transition: opacity 0.5s ease;
 		background-color: rgba(0, 0, 0, 0.5);
 		opacity: 0;
-		padding-top: 1rem;
-		display: flex;
-		justify-content: center;
-		/* align with top of poster */
-		margin-top: -304px;
-		height: 278px;
-		width: 100%;
+		z-index: 1;
+	}
+
+	poster-overlay:hover {
+		opacity: 1;
 	}
 
 	movie-title {
 		color: white;
 		font-weight: bold;
-		font-size: 18px;
+		font-size: 1.3rem;
 		text-align: center;
 		padding: 0 0.5rem;
 	}
 
-	poster-overlay:hover {
-		opacity: 1;
+	empty-table {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
 	}
 
 	button-wrap {

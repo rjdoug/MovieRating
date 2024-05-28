@@ -24,17 +24,18 @@
 </main>
 
 <style>
-	/* #FAFAFB - Snow
-	#EFB7BA - spanish pink
-	#e5c0c8 - dust storm
-	#cbd5f0 - soap
-	#194F92 - yale blue */
+	:root {
+		--panel-color: #fefeff;
+		--background-color: #f9f9f9;
+	}
 
 	:global(body, html) {
 		height: 100%;
 		padding: 0;
 		margin: 0;
-		background-color: #fafafb; /* Light gray background */
+		/* background-color: #fafafb; Light gray background */
+		background-color: var(--background-color); /* Light gray background */
+
 		font-family: 'Roboto', sans-serif; /* Material UI default font */
 	}
 
