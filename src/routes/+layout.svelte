@@ -27,6 +27,19 @@
 	:root {
 		--panel-color: #fefeff;
 		--background-color: #f9f9f9;
+		--color-heading: #252a31;
+		--font-size-h1: 40px;
+		--color-text-primary: #252a31;
+		--font-size-text-large: 16px;
+		--font-size-text-normal: 15px;
+		--font-size-text-small: 13px;
+		--color-primary: #00a58e;
+		--color-primary-hover: #009580;
+
+		--box-shadow-fixed: 0 0 2px 0 rgba(37, 42, 49, 0.16), 0 2px 4px 0 rgba(37, 42, 49, 0.12);
+		--box-shadow-action: 0 0 2px 0 rgba(37, 42, 49, 0.16), 0 1px 4px 0 rgba(37, 42, 49, 0.12);
+		--box-shadow-action-active: 0 1px 4px 0 rgba(37, 42, 49, 0.16),
+			0 4px 8px 0 rgba(37, 42, 49, 0.12);
 	}
 
 	:global(body, html) {
@@ -35,12 +48,11 @@
 		margin: 0;
 		/* background-color: #fafafb; Light gray background */
 		background-color: var(--background-color); /* Light gray background */
-
+		color: var(--color-text-primary);
 		font-family: 'Roboto', sans-serif; /* Material UI default font */
 	}
 
 	.selected {
-		background-color: #a0b0df;
 	}
 
 	nav ul {
@@ -49,8 +61,9 @@
 		padding: 0;
 		display: flex;
 		align-items: center;
-		background-color: #cbd5f0;
+		background-color: var(--panel-color);
 		height: 3rem;
+		box-shadow: var(--box-shadow-fixed);
 	}
 
 	li {
@@ -59,7 +72,8 @@
 
 	nav ul li a {
 		text-decoration: none;
-		color: #194f92;
+		color: var(--color-text-primary);
+		font-size: var(--font-size-text-normal);
 		display: flex;
 		align-items: center;
 		transition: background-color 0.3s ease;

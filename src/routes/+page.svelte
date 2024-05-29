@@ -5,8 +5,6 @@
 
 	export let data;
 
-	console.log(data.ratings);
-
 	// Typecasting being a prick in svelte, so placing function here
 	function onKeyUp(event: KeyboardEvent) {
 		if (event.key == 'Enter') {
@@ -15,7 +13,7 @@
 	}
 </script>
 
-<h1>My Ratings</h1>
+<h1>Ratings</h1>
 <rating-table>
 	{#each data.ratings as rating}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -43,7 +41,7 @@
 
 <button-wrap>
 	<SimpleButton onClick={() => goto(data.url?.href + 'ratings/new')} {onKeyUp}
-		>New Rating</SimpleButton
+		>Add Rating</SimpleButton
 	>
 </button-wrap>
 
@@ -51,6 +49,8 @@
 	h1 {
 		font-size: 3.5rem;
 		font-weight: 600;
+		color: var(--color-heading);
+		font-size: var(--font-size-h1);
 	}
 	rating-table {
 		display: flex;
@@ -70,16 +70,16 @@
 		position: relative;
 
 		width: 185px;
-		border-radius: 5px;
+		border-radius: 3px;
 		margin-bottom: 2rem;
 
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: var(--box-shadow-action);
 		overflow: hidden;
 		transition: box-shadow 0.3s ease;
 	}
 
 	movie-poster:hover {
-		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		box-shadow: var(--box-shadow-action-active);
 	}
 
 	.poster-img {
