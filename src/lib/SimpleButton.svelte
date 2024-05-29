@@ -11,14 +11,15 @@
 <style>
 	add-rating-button {
 		font-size: var(--font-size-text-large);
-		color: var(--background-color);
-		border-radius: 3px;
-		padding: 16px 16px;
-		background-color: var(--color-primary);
+		color: var(--color-text-menu);
+		border: 1px solid var(--color-button-border);
+		border-radius: 10px;
+		padding: 12px 16px;
+		background-color: var(--color-button-background);
 	}
 
 	add-rating-button:hover {
-		background-color: var(--color-primary-hover);
+		background-color: var(--color-button-background-hover);
 		cursor: pointer;
 	}
 </style>

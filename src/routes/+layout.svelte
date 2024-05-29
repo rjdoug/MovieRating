@@ -25,16 +25,27 @@
 
 <style>
 	:root {
-		--panel-color: #fefeff;
-		--background-color: #f9f9f9;
+		--panel-color: #1f2635;
+		--background-color: #16212e;
 		--color-heading: #252a31;
+
 		--font-size-h1: 40px;
-		--color-text-primary: #252a31;
 		--font-size-text-large: 16px;
 		--font-size-text-normal: 15px;
 		--font-size-text-small: 13px;
+
 		--color-primary: #00a58e;
 		--color-primary-hover: #009580;
+		--color-border: #374050;
+		--color-text-menu: #fffefe;
+
+		--color-button-background: #423cbf;
+		--color-button-border: #6367f0;
+		--color-button-background-hover: #4f47e4;
+
+		--color-text-primary: #d1d5db;
+		--color-title-primary: #818cf8;
+		--color-title-secondary: #c084fc;
 
 		--box-shadow-fixed: 0 0 2px 0 rgba(37, 42, 49, 0.16), 0 2px 4px 0 rgba(37, 42, 49, 0.12);
 		--box-shadow-action: 0 0 2px 0 rgba(37, 42, 49, 0.16), 0 1px 4px 0 rgba(37, 42, 49, 0.12);
@@ -52,9 +63,6 @@
 		font-family: 'Roboto', sans-serif; /* Material UI default font */
 	}
 
-	.selected {
-	}
-
 	nav ul {
 		list-style-type: none;
 		margin: 0;
@@ -63,7 +71,8 @@
 		align-items: center;
 		background-color: var(--panel-color);
 		height: 3rem;
-		box-shadow: var(--box-shadow-fixed);
+		/* box-shadow: var(--box-shadow-fixed); */
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	li {
@@ -72,7 +81,7 @@
 
 	nav ul li a {
 		text-decoration: none;
-		color: var(--color-text-primary);
+		color: var(--color-text-menu);
 		font-size: var(--font-size-text-normal);
 		display: flex;
 		align-items: center;
@@ -91,6 +100,11 @@
 		align-items: center;
 		flex-direction: column;
 		margin: 2rem;
-		height: 100%;
+	}
+
+	@media (min-width: 320px) {
+		main {
+			margin: 0;
+		}
 	}
 </style>

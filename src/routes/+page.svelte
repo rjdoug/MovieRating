@@ -46,22 +46,33 @@
 </button-wrap>
 
 <style>
+	@media (min-width: 481px) {
+		/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+	}
+	@media (min-width: 641px) {
+		/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+	}
+	@media (min-width: 961px) {
+		/* tablet, landscape iPad, lo-res laptops ands desktops */
+	}
+
+	@media (min-width: 1281px) {
+		/* hi-res laptops and desktops */
+	}
+
 	h1 {
 		font-size: 3.5rem;
 		font-weight: 600;
-		color: var(--color-heading);
 		font-size: var(--font-size-h1);
+		margin-top: 1rem;
+		color: var(--color-title-primary);
 	}
 	rating-table {
 		display: flex;
 		width: 100%;
 		flex-wrap: wrap;
 		align-items: start;
-		gap: 16px;
 		margin-top: 1rem;
-		min-height: 35vh;
-		/* -1rem on bottom to offset the movie poster margin for last row */
-		padding: 1rem;
 	}
 
 	movie-poster {
@@ -69,17 +80,11 @@
 		flex-direction: column;
 		position: relative;
 
-		width: 185px;
-		border-radius: 3px;
-		margin-bottom: 2rem;
+		border: 1px solid var(--color-border);
+		border-radius: 10px;
 
-		box-shadow: var(--box-shadow-action);
 		overflow: hidden;
 		transition: box-shadow 0.3s ease;
-	}
-
-	movie-poster:hover {
-		box-shadow: var(--box-shadow-action-active);
 	}
 
 	.poster-img {
@@ -138,6 +143,39 @@
 	}
 
 	button-wrap {
-		margin-top: 2rem;
+		display: flex;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	@media (min-width: 320px) {
+		/* smartphones, iPhone, portrait 480x320 phones */
+		rating-table {
+			justify-content: space-evenly;
+		}
+
+		movie-poster {
+			margin-bottom: 16px;
+		}
+
+		.poster-img {
+			/* Force img to fit to 278px - Mostly the standard, but will zoom anything that doesn't fit */
+			object-fit: cover;
+			height: auto;
+		}
+	}
+
+	@media (min-width: 1025px) {
+		/* big landscape tablets, laptops, and desktops */
+		rating-table {
+			min-height: 300px;
+			gap: 16px;
+			padding: 1rem;
+			justify-content: start;
+		}
+
+		movie-poster {
+			margin-bottom: 2rem;
+		}
 	}
 </style>
