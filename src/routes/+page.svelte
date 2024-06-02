@@ -72,7 +72,7 @@
 		width: 100%;
 		flex-wrap: wrap;
 		align-items: start;
-		margin-top: 1rem;
+		margin-top: 1.5rem;
 	}
 
 	movie-poster {
@@ -90,8 +90,8 @@
 	.poster-img {
 		/* Force img to fit to 278px - Mostly the standard, but will zoom anything that doesn't fit */
 		object-fit: cover;
-		height: 278px;
-		width: 185px;
+		height: auto;
+		width: 11.5em;
 	}
 
 	total-rating {
@@ -159,9 +159,9 @@
 		}
 
 		.poster-img {
-			/* Force img to fit to 278px - Mostly the standard, but will zoom anything that doesn't fit */
 			object-fit: cover;
 			height: auto;
+			width: 11.5em;
 		}
 	}
 
@@ -176,6 +176,10 @@
 
 		movie-poster {
 			margin-bottom: 2rem;
+		}
+
+		.poster-img {
+			width: 14em;
 		}
 	}
 </style>
