@@ -68,11 +68,12 @@
 		color: var(--color-title-primary);
 	}
 	rating-table {
-		display: flex;
+		display: grid;
 		width: 100%;
-		flex-wrap: wrap;
-		align-items: start;
 		margin-top: 1.5rem;
+		grid-template-columns: repeat(2, 1fr);
+		padding: 0 12px;
+		gap: 6px;
 	}
 
 	movie-poster {
@@ -88,10 +89,7 @@
 	}
 
 	.poster-img {
-		/* Force img to fit to 278px - Mostly the standard, but will zoom anything that doesn't fit */
 		object-fit: cover;
-		height: auto;
-		width: 11.5em;
 	}
 
 	total-rating {
@@ -118,6 +116,9 @@
 		transition: opacity 0.5s ease;
 		background-color: rgba(0, 0, 0, 0.5);
 		opacity: 0;
+		@media (min-width: 320px) {
+			/* smartphones, iPhone, portrait 480x320 phones */
+		}
 		z-index: 1;
 	}
 
@@ -148,26 +149,33 @@
 		margin-bottom: 1rem;
 	}
 
-	@media (min-width: 320px) {
-		/* smartphones, iPhone, portrait 480x320 phones */
+	@media (min-width: 768px) {
 		rating-table {
-			justify-content: space-evenly;
-		}
-
-		movie-poster {
-			margin-bottom: 16px;
-		}
-
-		.poster-img {
-			object-fit: cover;
-			height: auto;
-			width: 11.5em;
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
-	@media (min-width: 1025px) {
-		/* big landscape tablets, laptops, and desktops */
+	@media (min-width: 992px) {
 		rating-table {
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
+
+	@media (min-width: 1200px) {
+		rating-table {
+			grid-template-columns: repeat(6, 1fr);
+		}
+	}
+
+	@media (min-width: 1600px) {
+		rating-table {
+			grid-template-columns: repeat(7, 1fr);
+			padding: 0 20px;
+			gap: 10px;
+		}
+
+		/* big landscape tablets, laptops, and desktops */
+		/* rating-table {
 			min-height: 300px;
 			gap: 16px;
 			padding: 1rem;
@@ -180,6 +188,6 @@
 
 		.poster-img {
 			width: 14em;
-		}
+		} */
 	}
 </style>

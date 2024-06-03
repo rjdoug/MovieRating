@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { userID } from '$lib/stores.js';
-	import { buildTMDBImgUrl, categories, getRatingCategoryData } from '$lib/utils';
-	import { error, redirect } from '@sveltejs/kit';
+	import { buildTMDBImgUrl, categories, getRatingCategoryData as filterRatingByCategories } from '$lib/utils';
+	import { error } from '@sveltejs/kit';
 	import { Button } from 'carbon-components-svelte';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 	import { get } from 'svelte/store';
 
 	export let data;
 
-	const ratingCategories = getRatingCategoryData(data.rating, categories);
+	const ratingCategories = filterRatingByCategories(data.rating, categories);
 
 	async function deleteRating() {
 		const uid = get(userID);
