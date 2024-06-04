@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
 	import type { KeyVal, TMDBMovie } from './types';
 	import { buildTMDBImgUrl } from './utils';
 
@@ -11,15 +12,16 @@
 	export let data: Data[];
 </script>
 
-<rating-table
-	style={data.length
-		? ''
-		: `
-                display: flex;
-                align-items: center;
-                padding: 5rem 0;
-        `}
->
+<!-- This is a weird one. If I tried to use class={!data.length ? 'empty' : 'grid'}
+    And any combination of doing that with a function, reactive statement or onMount
+    led to the css style not being able to update itself when it needed to change.
+
+    It should be noted thta the way the classes are applied like this in svelte are
+    the same as reactive statements - only updates when the variable changes 
+
+    I'm pretty confident if reformat this to use a reactive statement to get the data
+    opposed to it being passed in, the first options would work. -->
+<rating-table class:empty={!data.length} class:grid={!!data.length}>
 	{#each data as d}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -45,13 +47,23 @@
 </rating-table>
 
 <style>
-	rating-table {
+	.empty {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 200px; /* Adjust based on your requirements */
+	}
+
+	.grid {
 		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 6px;
+	}
+
+	rating-table {
 		width: 100%;
 		margin-top: 1.5rem;
-		grid-template-columns: repeat(2, 1fr);
 		padding: 0 12px;
-		gap: 6px;
 	}
 
 	movie-poster {
@@ -113,44 +125,28 @@
 	}
 
 	@media (min-width: 768px) {
-		rating-table {
+		.grid {
 			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
 	@media (min-width: 992px) {
-		rating-table {
+		.grid {
 			grid-template-columns: repeat(5, 1fr);
 		}
 	}
 
 	@media (min-width: 1200px) {
-		rating-table {
+		.grid {
 			grid-template-columns: repeat(6, 1fr);
 		}
 	}
 
 	@media (min-width: 1600px) {
-		rating-table {
+		.grid {
 			grid-template-columns: repeat(7, 1fr);
 			padding: 0 20px;
 			gap: 10px;
 		}
-
-		/* big landscape tablets, laptops, and desktops */
-		/* rating-table {
-			min-height: 300px;
-			gap: 16px;
-			padding: 1rem;
-			justify-content: start;
-		}
-
-		movie-poster {
-			margin-bottom: 2rem;
-		}
-
-		.poster-img {
-			width: 14em;
-		} */
 	}
 </style>
