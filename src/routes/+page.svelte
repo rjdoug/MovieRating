@@ -15,7 +15,7 @@
 
 <h1>Ratings</h1>
 
-<MovieTable data={data.ratings}>
+<MovieTable data={{ movies: data.ratings, onSelectPath: 'ratings/*' }}>
 	<empty-table>
 		<h2>No Ratings</h2>
 		<p>Add a new rating to get started</p>

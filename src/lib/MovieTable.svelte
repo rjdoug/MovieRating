@@ -1,15 +1,22 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
+	//
 	import type { KeyVal, TMDBMovie } from './types';
 	import { buildTMDBImgUrl } from './utils';
 
 	type Data = {
-		movie: TMDBMovie;
-		totalRating?: KeyVal;
+		movies: { movie: TMDBMovie; totalRating?: KeyVal }[];
+		// If a wildcard (*) is specified in string, it will be replaced with the movieID
+		onSelectPath: string;
 	};
 
-	export let data: Data[];
+	export let data: Data;
+
+	function buildRedirectPath(pathTemplate: string, movieID: string): string {
+		let x = pathTemplate.replace('*', movieID);
+		console.log(x);
+		return x;
+	}
 </script>
 
 <!-- This is a weird one. If I tried to use class={!data.length ? 'empty' : 'grid'}
@@ -21,11 +28,13 @@
 
     I'm pretty confident if reformat this to use a reactive statement to get the data
     opposed to it being passed in, the first options would work. -->
-<rating-table class:empty={!data.length} class:grid={!!data.length}>
-	{#each data as d}
+<rating-table class:empty={!data.movies.length} class:grid={!!data.movies.length}>
+	{#each data.movies as d}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<movie-poster on:click={() => goto(`/ratings/${d.movie.id}`)}>
+		<movie-poster
+			on:click={() => goto(buildRedirectPath(data.onSelectPath, d.movie.id.toString()))}
+		>
 			<img
 				class="poster-img"
 				src={buildTMDBImgUrl(d.movie.poster_path)}

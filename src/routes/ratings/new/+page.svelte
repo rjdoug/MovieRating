@@ -35,7 +35,9 @@
 </script>
 
 <Search bind:value={searchValue} on:keyup={(event) => onSearchKeyUp(event)} />
-<MovieTable data={movieList.results.map((movie) => ({ movie }))}>
+<MovieTable
+	data={{ movies: movieList.results.map((movie) => ({ movie })), onSelectPath: '/ratings/*/edit' }}
+>
 	<empty-table>
 		<h2>No Movies Found</h2>
 		<p>Search for a movie to find some</p>
