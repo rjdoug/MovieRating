@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { userID } from '$lib/stores.js';
-	import { buildTMDBImgUrl, categories, getRatingCategoryData as filterRatingByCategories } from '$lib/utils';
+	import {
+		buildTMDBImgUrl,
+		categories,
+		getRatingCategoryData as filterRatingByCategories
+	} from '$lib/utils';
 	import { error } from '@sveltejs/kit';
 	import { Button } from 'carbon-components-svelte';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
@@ -76,7 +80,7 @@
 		position: relative;
 		display: flex;
 		width: 100%;
-		align-items: center;
+		align-items: flex-start;
 	}
 
 	delete-button {
@@ -94,7 +98,7 @@
 	}
 	main {
 		display: flex;
-		width: 40%;
+		width: 100%;
 		margin-top: 2rem;
 	}
 	movie-poster {
@@ -102,7 +106,7 @@
 		flex: 1;
 	}
 	img {
-		height: 40vh;
+		height: 30vh;
 		border-radius: 5px;
 	}
 	rating-details {

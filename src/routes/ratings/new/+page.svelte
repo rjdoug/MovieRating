@@ -36,7 +36,10 @@
 
 <Search bind:value={searchValue} on:keyup={(event) => onSearchKeyUp(event)} />
 <MovieTable
-	data={{ movies: movieList.results.map((movie) => ({ movie })), onSelectPath: '/ratings/*/edit' }}
+	data={{
+		movies: movieList.results.map((movie) => ({ movie })),
+		onSelectPathTemplate: '/ratings/*/edit'
+	}}
 >
 	<empty-table>
 		<h2>No Movies Found</h2>
