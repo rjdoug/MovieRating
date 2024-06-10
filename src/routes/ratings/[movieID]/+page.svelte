@@ -1,3 +1,4 @@
+<!-- NOTE: If you need to wrap the component, the wraps display needs to be flex, contents -->
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Poster from '$lib/Poster.svelte';
@@ -33,7 +34,7 @@
 
 <header>
 	<h1>{data.rating.movie.title}</h1>
-	<delete-button>
+	<!-- <delete-button>
 		<Button
 			kind="danger-tertiary"
 			iconDescription="Delete"
@@ -44,15 +45,17 @@
 				goto('/');
 			}}
 		/>
-	</delete-button>
+	</delete-button> -->
 </header>
 <main>
-	<Poster
-		data={{
-			movie: data.rating.movie,
-			totalRating: data.rating.totalRating
-		}}
-	/>
+	<poster-wrap>
+		<Poster
+			data={{
+				movie: data.rating.movie,
+				totalRating: data.rating.totalRating
+			}}
+		/>
+	</poster-wrap>
 
 	<rating-details>
 		{#each Object.entries(ratingCategories) as [key, value]}
@@ -65,14 +68,6 @@
 				</category-value>
 			</category-detail>
 		{/each}
-		<total-rating>
-			<total-label>
-				{data.rating.totalRating.label}
-			</total-label>
-			<total-value>
-				{data.rating.totalRating.value}/5
-			</total-value>
-		</total-rating>
 	</rating-details>
 </main>
 
@@ -99,22 +94,23 @@
 	}
 	main {
 		display: flex;
+		flex-direction: column;
 		width: 100%;
-		margin-top: 2rem;
+		margin-top: 1rem;
 	}
-	movie-poster {
+
+	poster-wrap {
 		display: flex;
-		flex: 1;
+		justify-content: space-around;
+		margin-bottom: 1rem;
 	}
-	img {
-		height: 30vh;
-		border-radius: 5px;
-	}
+
 	rating-details {
 		display: flex;
 		flex-direction: column;
 		flex: 3;
 		gap: 0.7rem;
+		padding: 0 1rem;
 	}
 
 	category-detail {
@@ -125,20 +121,5 @@
 
 	category-label {
 		flex: 1;
-	}
-
-	total-rating {
-		display: flex;
-		flex-direction: column;
-		margin: auto;
-		min-width: 2rem;
-		width: 10rem;
-		height: 5rem;
-		gap: 0.5rem;
-		align-items: center;
-		justify-content: center;
-		font-size: 1.5rem;
-		border: 1px solid black;
-		border-radius: 5px;
 	}
 </style>

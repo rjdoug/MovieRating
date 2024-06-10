@@ -1,3 +1,4 @@
+<!-- NOTE: Use flex or grid with component to have it size correctly with the image -->
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { KeyVal, TMDBMovie } from './types';
