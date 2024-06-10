@@ -6,15 +6,21 @@
 	type Data = {
 		movie: TMDBMovie;
 		totalRating?: KeyVal;
-		onSelectPath: string;
+		onSelectPath?: string;
 	};
 
 	export let data: Data;
+
+	$: selectable = !!data.onSelectPath;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<movie-poster on:click={() => goto(data.onSelectPath)}>
+<movie-poster
+	on:click={() => {
+		if (selectable) goto(data.onSelectPath || '');
+	}}
+>
 	<img
 		class="poster-img"
 		src={buildTMDBImgUrl(data.movie.poster_path)}
@@ -25,9 +31,11 @@
 		<total-rating>{data.totalRating?.value * 2}/10</total-rating>
 	{/if}
 
-	<poster-overlay>
-		<movie-title>{data.movie.title}</movie-title>
-	</poster-overlay>
+	{#if selectable}
+		<poster-overlay>
+			<movie-title>{data.movie.title}</movie-title>
+		</poster-overlay>
+	{/if}
 </movie-poster>
 
 <style>
@@ -35,12 +43,11 @@
 		display: flex;
 		flex-direction: column;
 		position: relative;
-
 		border: 1px solid var(--color-border);
 		border-radius: 10px;
-
 		overflow: hidden;
 		transition: box-shadow 0.3s ease;
+		align-self: flex-start;
 	}
 
 	.poster-img {

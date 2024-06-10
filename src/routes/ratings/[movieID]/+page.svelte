@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import Poster from '$lib/Poster.svelte';
 	import { userID } from '$lib/stores.js';
 	import {
 		buildTMDBImgUrl,
@@ -13,6 +14,7 @@
 
 	export let data;
 
+	let x = data.rating.totalRating;
 	const ratingCategories = filterRatingByCategories(data.rating, categories);
 
 	async function deleteRating() {
@@ -45,13 +47,12 @@
 	</delete-button>
 </header>
 <main>
-	<movie-poster>
-		<img
-			class="poster-img"
-			src={buildTMDBImgUrl(data.rating.movie.poster_path)}
-			alt={data.rating.movie.title + ' poster'}
-		/>
-	</movie-poster>
+	<Poster
+		data={{
+			movie: data.rating.movie,
+			totalRating: data.rating.totalRating
+		}}
+	/>
 
 	<rating-details>
 		{#each Object.entries(ratingCategories) as [key, value]}
