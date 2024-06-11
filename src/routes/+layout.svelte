@@ -97,7 +97,7 @@
 
 	nav ul li:hover,
 	.selected:hover {
-		background-color: #a0b0df;
+		background-color: var(--background-color);
 	}
 
 	main {
