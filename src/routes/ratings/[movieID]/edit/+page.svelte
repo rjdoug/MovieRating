@@ -111,6 +111,7 @@
 					</label>
 				{/each}
 			</category-options>
+			<!-- TODO:  Update SimpleButton to handle this -->
 			<button type="submit">{maxIndex === currentIndex ? 'Finish' : 'Next'}</button>
 		</form>
 		<icon-park-outline-check-one />
@@ -138,6 +139,7 @@
 		font-size: 3rem;
 		font-weight: bold;
 		margin: 1rem 0;
+		text-align: center;
 	}
 
 	category-description {
@@ -153,6 +155,11 @@
 		min-width: 40%;
 	}
 
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+
 	category-options {
 		display: flex;
 		flex-direction: column;
@@ -161,7 +168,8 @@
 	}
 
 	category-options > label:hover {
-		background-color: #e4e4e4;
+		background-color: var(--panel-color);
+		user-select: none;
 	}
 
 	category-options > label {
@@ -175,19 +183,17 @@
 	}
 
 	button {
-		border: 1px solid #194f92;
-		border-radius: 5px;
-		color: #194f92;
-		background-color: transparent;
-		padding: 0.7rem 1rem;
-		margin: 0;
-		background-color: #cbd5f0;
-		cursor: pointer;
-		width: 100%;
+		font-size: var(--font-size-text-large);
+		color: var(--color-text-menu);
+		border: 1px solid var(--color-button-border);
+		border-radius: 10px;
+		padding: 12px 16px;
+		background-color: var(--color-button-background);
+		margin: 0 0.3rem 0.3rem 0.3rem;
 	}
 
 	button:hover {
-		background-color: #a0b0df;
+		background-color: var(--color-button-background-hover);
 		cursor: pointer;
 	}
 

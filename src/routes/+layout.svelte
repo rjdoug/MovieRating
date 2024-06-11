@@ -63,6 +63,11 @@
 		font-family: 'Roboto', sans-serif; /* Material UI default font */
 	}
 
+	:global(*) {
+		-webkit-tap-highlight-color: transparent; /* For WebKit browsers */
+		outline: none; /* For Firefox browsers */
+	}
+
 	nav ul {
 		list-style-type: none;
 		margin: 0;
