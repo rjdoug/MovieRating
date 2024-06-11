@@ -87,52 +87,40 @@
 			return;
 		}
 	}
+
+	function redirectOnCompletion(completed: boolean) {
+		if (completed) goto(`/ratings/${data.movie.id}`);
+	}
+
+	$: _ = redirectOnCompletion(completed);
 </script>
 
-{#if !completed}
-	<category-title>{category.category}</category-title>
-	<category-description>{category.description}</category-description>
-	<!-- <category-weight>{category.weight}</category-weight> -->
+<category-title>{category.category}</category-title>
+<category-description>{category.description}</category-description>
+<!-- <category-weight>{category.weight}</category-weight> -->
 
-	<category-rating>
-		<form on:submit={handleSubmit}>
-			<category-options>
-				{#each category.options as option, index}
-					<label>
-						<input
-							type="radio"
-							name="option"
-							value={option.value}
-							checked={index === selectedIndex}
-							on:change={() => (selectedIndex = index)}
-						/>
-						{index + 1}.
-						{option.label}
-					</label>
-				{/each}
-			</category-options>
-			<!-- TODO:  Update SimpleButton to handle this -->
-			<button type="submit">{maxIndex === currentIndex ? 'Finish' : 'Next'}</button>
-		</form>
-		<icon-park-outline-check-one />
-	</category-rating>
-{:else}
-	<!-- I think we should just have a separate page where we get query the db to get the data out. Too complex
-	too try pulling the data out of our poorly formed data structures -->
-	<completed-card>
-		<completed-message>Rating for '{data.movie.title}' successfully added</completed-message>
-		<completed-icon>
-			<iconify-icon class="check-one" icon="icon-park-outline:check-one"></iconify-icon>
-		</completed-icon>
-		<completed-ratings>
-			<total-rating>Total Rating: {overallRating}/5</total-rating>
-		</completed-ratings>
-		<navigation-buttons>
-			<SimpleButton onClick={() => goto('/')} {onKeyUp}>Home</SimpleButton>
-			<SimpleButton onClick={() => console.log(data.url)} {onKeyUp}>View</SimpleButton>
-		</navigation-buttons>
-	</completed-card>
-{/if}
+<category-rating>
+	<form on:submit={handleSubmit}>
+		<category-options>
+			{#each category.options as option, index}
+				<label>
+					<input
+						type="radio"
+						name="option"
+						value={option.value}
+						checked={index === selectedIndex}
+						on:change={() => (selectedIndex = index)}
+					/>
+					{index + 1}.
+					{option.label}
+				</label>
+			{/each}
+		</category-options>
+		<!-- TODO:  Update SimpleButton to handle this -->
+		<button type="submit">{maxIndex === currentIndex ? 'Finish' : 'Next'}</button>
+	</form>
+	<icon-park-outline-check-one />
+</category-rating>
 
 <style>
 	category-title {
