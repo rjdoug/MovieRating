@@ -18,7 +18,6 @@
 	// Rating for each category
 	const ratings = createEmptyRating();
 
-	// I'm so sorry for this
 	let completed = false;
 
 	let overallRating = 0;
@@ -142,12 +141,12 @@
 	}
 
 	category-description {
-		width: 40%;
-		text-align: justify;
+		text-align: center;
 		text-align-last: center;
 		line-height: 1.3rem;
 		font-size: 1.1rem;
 		font-style: italic;
+		padding: 0 0.4rem;
 	}
 
 	category-rating {
@@ -158,6 +157,7 @@
 		display: flex;
 		flex-direction: column;
 		margin: 2rem 0;
+		padding: 0 0.3rem;
 	}
 
 	category-options > label:hover {
@@ -165,7 +165,7 @@
 	}
 
 	category-options > label {
-		border: 1px solid rgb(202, 197, 197);
+		border: 1px solid var(--color-border);
 		padding: 1rem;
 		cursor: pointer;
 	}

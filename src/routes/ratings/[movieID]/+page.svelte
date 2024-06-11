@@ -1,16 +1,9 @@
 <!-- NOTE: If you need to wrap the component, the wraps display needs to be flex, contents -->
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import Poster from '$lib/Poster.svelte';
 	import { userID } from '$lib/stores.js';
-	import {
-		buildTMDBImgUrl,
-		categories,
-		getRatingCategoryData as filterRatingByCategories
-	} from '$lib/utils';
+	import { categories, getRatingCategoryData as filterRatingByCategories } from '$lib/utils';
 	import { error } from '@sveltejs/kit';
-	import { Button } from 'carbon-components-svelte';
-	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 	import { get } from 'svelte/store';
 
 	export let data;
@@ -34,6 +27,7 @@
 
 <header>
 	<h1>{data.rating.movie.title}</h1>
+	<!-- TODO: Reimplement as 3 dot menu -->
 	<!-- <delete-button>
 		<Button
 			kind="danger-tertiary"
