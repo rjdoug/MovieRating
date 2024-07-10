@@ -11,9 +11,7 @@
 	export let data: Data;
 
 	function buildRedirectPath(pathTemplate: string, movieID: string): string {
-		let x = pathTemplate.replace('*', movieID);
-		console.log(x);
-		return x;
+		return pathTemplate.replace('*', movieID);
 	}
 </script>
 
@@ -80,7 +78,7 @@
 
 	@media (min-width: 1600px) {
 		.grid {
-			grid-template-columns: repeat(7, 1fr);
+			grid-template-columns: repeat(8, 1fr);
 			padding: 0 20px;
 			gap: 10px;
 		}

@@ -34,7 +34,7 @@
 	}
 </script>
 
-<Search bind:value={searchValue} on:keyup={(event) => onSearchKeyUp(event)} />
+<Search size={'xl'} bind:value={searchValue} on:keyup={(event) => onSearchKeyUp(event)} />
 <MovieTable
 	data={{
 		movies: movieList.results.map((movie) => ({ movie })),

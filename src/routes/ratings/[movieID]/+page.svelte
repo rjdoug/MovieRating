@@ -89,8 +89,9 @@
 	main {
 		display: flex;
 		flex-direction: column;
-		width: 100%;
 		margin-top: 1rem;
+		width: 100%;
+		align-items: center;
 	}
 
 	poster-wrap {
@@ -102,9 +103,12 @@
 	rating-details {
 		display: flex;
 		flex-direction: column;
-		flex: 3;
+		flex: 1;
 		gap: 0.7rem;
 		padding: 0 1rem;
+		width: 50%;
+		min-width: 300px;
+		max-width: 400px;
 	}
 
 	category-detail {
