@@ -137,6 +137,9 @@
 		font-size: 1.1rem;
 		font-style: italic;
 		padding: 0 0.4rem;
+		width: 70%;
+		max-width: 900px;
+		min-width: 350px;
 	}
 
 	category-rating {
