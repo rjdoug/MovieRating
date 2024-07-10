@@ -33,7 +33,7 @@ export type DB_Rating = {
 	totalRating: number;
 };
 
-type KeyVal = {
+export type KeyVal = {
 	label: string;
 	value: any;
 };

@@ -10,15 +10,16 @@
 
 <style>
 	add-rating-button {
-		border: 1px solid #194f92;
-		color: #194f92;
-		border-radius: 5px;
-		padding: 0.5rem 1rem;
-		background-color: #cbd5f0;
+		font-size: var(--font-size-text-large);
+		color: var(--color-text-menu);
+		border: 1px solid var(--color-button-border);
+		border-radius: 10px;
+		padding: 12px 16px;
+		background-color: var(--color-button-background);
 	}
 
 	add-rating-button:hover {
-		background-color: #a0b0df;
+		background-color: var(--color-button-background-hover);
 		cursor: pointer;
 	}
 </style>

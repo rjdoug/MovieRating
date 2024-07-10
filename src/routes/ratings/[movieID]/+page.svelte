@@ -1,15 +1,15 @@
+<!-- NOTE: If you need to wrap the component, the wraps display needs to be flex, contents -->
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import Poster from '$lib/Poster.svelte';
 	import { userID } from '$lib/stores.js';
-	import { buildTMDBImgUrl, categories, getRatingCategoryData } from '$lib/utils';
-	import { error, redirect } from '@sveltejs/kit';
-	import { Button } from 'carbon-components-svelte';
-	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
+	import { categories, getRatingCategoryData as filterRatingByCategories } from '$lib/utils';
+	import { error } from '@sveltejs/kit';
 	import { get } from 'svelte/store';
 
 	export let data;
 
-	const ratingCategories = getRatingCategoryData(data.rating, categories);
+	let x = data.rating.totalRating;
+	const ratingCategories = filterRatingByCategories(data.rating, categories);
 
 	async function deleteRating() {
 		const uid = get(userID);
@@ -27,7 +27,8 @@
 
 <header>
 	<h1>{data.rating.movie.title}</h1>
-	<delete-button>
+	<!-- TODO: Reimplement as 3 dot menu -->
+	<!-- <delete-button>
 		<Button
 			kind="danger-tertiary"
 			iconDescription="Delete"
@@ -38,16 +39,17 @@
 				goto('/');
 			}}
 		/>
-	</delete-button>
+	</delete-button> -->
 </header>
 <main>
-	<movie-poster>
-		<img
-			class="poster-img"
-			src={buildTMDBImgUrl(data.rating.movie.poster_path)}
-			alt={data.rating.movie.title + ' poster'}
+	<poster-wrap>
+		<Poster
+			data={{
+				movie: data.rating.movie,
+				totalRating: data.rating.totalRating
+			}}
 		/>
-	</movie-poster>
+	</poster-wrap>
 
 	<rating-details>
 		{#each Object.entries(ratingCategories) as [key, value]}
@@ -60,14 +62,6 @@
 				</category-value>
 			</category-detail>
 		{/each}
-		<total-rating>
-			<total-label>
-				{data.rating.totalRating.label}
-			</total-label>
-			<total-value>
-				{data.rating.totalRating.value}/5
-			</total-value>
-		</total-rating>
 	</rating-details>
 </main>
 
@@ -76,7 +70,7 @@
 		position: relative;
 		display: flex;
 		width: 100%;
-		align-items: center;
+		align-items: flex-start;
 	}
 
 	delete-button {
@@ -94,22 +88,27 @@
 	}
 	main {
 		display: flex;
-		width: 40%;
-		margin-top: 2rem;
+		flex-direction: column;
+		margin-top: 1rem;
+		width: 100%;
+		align-items: center;
 	}
-	movie-poster {
+
+	poster-wrap {
 		display: flex;
-		flex: 1;
+		justify-content: space-around;
+		margin-bottom: 1rem;
 	}
-	img {
-		height: 40vh;
-		border-radius: 5px;
-	}
+
 	rating-details {
 		display: flex;
 		flex-direction: column;
-		flex: 3;
+		flex: 1;
 		gap: 0.7rem;
+		padding: 0 1rem;
+		width: 50%;
+		min-width: 300px;
+		max-width: 400px;
 	}
 
 	category-detail {
@@ -120,20 +119,5 @@
 
 	category-label {
 		flex: 1;
-	}
-
-	total-rating {
-		display: flex;
-		flex-direction: column;
-		margin: auto;
-		min-width: 2rem;
-		width: 10rem;
-		height: 5rem;
-		gap: 0.5rem;
-		align-items: center;
-		justify-content: center;
-		font-size: 1.5rem;
-		border: 1px solid black;
-		border-radius: 5px;
 	}
 </style>

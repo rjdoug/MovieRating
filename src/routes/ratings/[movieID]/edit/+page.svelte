@@ -18,7 +18,6 @@
 	// Rating for each category
 	const ratings = createEmptyRating();
 
-	// I'm so sorry for this
 	let completed = false;
 
 	let overallRating = 0;
@@ -88,84 +87,84 @@
 			return;
 		}
 	}
+
+	function redirectOnCompletion(completed: boolean) {
+		if (completed) goto(`/ratings/${data.movie.id}`);
+	}
+
+	$: _ = redirectOnCompletion(completed);
 </script>
 
-{#if !completed}
-	<category-title>{category.category}</category-title>
-	<category-description>{category.description}</category-description>
-	<!-- <category-weight>{category.weight}</category-weight> -->
+<category-title>{category.category}</category-title>
+<category-description>{category.description}</category-description>
+<!-- <category-weight>{category.weight}</category-weight> -->
 
-	<category-rating>
-		<form on:submit={handleSubmit}>
-			<category-options>
-				{#each category.options as option, index}
-					<label>
-						<input
-							type="radio"
-							name="option"
-							value={option.value}
-							checked={index === selectedIndex}
-							on:change={() => (selectedIndex = index)}
-						/>
-						{index + 1}.
-						{option.label}
-					</label>
-				{/each}
-			</category-options>
-			<button type="submit">{maxIndex === currentIndex ? 'Finish' : 'Next'}</button>
-		</form>
-		<icon-park-outline-check-one />
-	</category-rating>
-{:else}
-	<!-- I think we should just have a separate page where we get query the db to get the data out. Too complex
-	too try pulling the data out of our poorly formed data structures -->
-	<completed-card>
-		<completed-message>Rating for '{data.movie.title}' successfully added</completed-message>
-		<completed-icon>
-			<iconify-icon class="check-one" icon="icon-park-outline:check-one"></iconify-icon>
-		</completed-icon>
-		<completed-ratings>
-			<total-rating>Total Rating: {overallRating}/5</total-rating>
-		</completed-ratings>
-		<navigation-buttons>
-			<SimpleButton onClick={() => goto('/')} {onKeyUp}>Home</SimpleButton>
-			<SimpleButton onClick={() => console.log(data.url)} {onKeyUp}>View</SimpleButton>
-		</navigation-buttons>
-	</completed-card>
-{/if}
+<category-rating>
+	<form on:submit={handleSubmit}>
+		<category-options>
+			{#each category.options as option, index}
+				<label>
+					<input
+						type="radio"
+						name="option"
+						value={option.value}
+						checked={index === selectedIndex}
+						on:change={() => (selectedIndex = index)}
+					/>
+					{index + 1}.
+					{option.label}
+				</label>
+			{/each}
+		</category-options>
+		<!-- TODO:  Update SimpleButton to handle this -->
+		<button type="submit">{maxIndex === currentIndex ? 'Finish' : 'Next'}</button>
+	</form>
+	<icon-park-outline-check-one />
+</category-rating>
 
 <style>
 	category-title {
 		font-size: 3rem;
 		font-weight: bold;
 		margin: 1rem 0;
+		text-align: center;
 	}
 
 	category-description {
-		width: 40%;
-		text-align: justify;
+		text-align: center;
 		text-align-last: center;
 		line-height: 1.3rem;
 		font-size: 1.1rem;
 		font-style: italic;
+		padding: 0 0.4rem;
+		width: 70%;
+		max-width: 900px;
+		min-width: 350px;
 	}
 
 	category-rating {
 		min-width: 40%;
 	}
 
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+
 	category-options {
 		display: flex;
 		flex-direction: column;
 		margin: 2rem 0;
+		padding: 0 0.3rem;
 	}
 
 	category-options > label:hover {
-		background-color: #e4e4e4;
+		background-color: var(--panel-color);
+		user-select: none;
 	}
 
 	category-options > label {
-		border: 1px solid rgb(202, 197, 197);
+		border: 1px solid var(--color-border);
 		padding: 1rem;
 		cursor: pointer;
 	}
@@ -175,19 +174,17 @@
 	}
 
 	button {
-		border: 1px solid #194f92;
-		border-radius: 5px;
-		color: #194f92;
-		background-color: transparent;
-		padding: 0.7rem 1rem;
-		margin: 0;
-		background-color: #cbd5f0;
-		cursor: pointer;
-		width: 100%;
+		font-size: var(--font-size-text-large);
+		color: var(--color-text-menu);
+		border: 1px solid var(--color-button-border);
+		border-radius: 10px;
+		padding: 12px 16px;
+		background-color: var(--color-button-background);
+		margin: 0 0.3rem 0.3rem 0.3rem;
 	}
 
 	button:hover {
-		background-color: #a0b0df;
+		background-color: var(--color-button-background-hover);
 		cursor: pointer;
 	}
 

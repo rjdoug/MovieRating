@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import SimpleButton from '$lib/SimpleButton.svelte';
-	import { buildTMDBImgUrl } from '$lib/utils.js';
+	import MovieTable from '$lib/MovieTable.svelte';
 
 	export let data;
-
-	console.log(data.ratings);
 
 	// Typecasting being a prick in svelte, so placing function here
 	function onKeyUp(event: KeyboardEvent) {
@@ -15,35 +13,18 @@
 	}
 </script>
 
-<h1>My Ratings</h1>
-<rating-table>
-	{#each data.ratings as rating}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<movie-poster on:click={() => goto(`/ratings/${rating.movieID}`)}>
-			<img
-				class="poster-img"
-				src={buildTMDBImgUrl(rating.movie.poster_path)}
-				alt={rating.movie.title + ' poster'}
-			/>
+<h1>Ratings</h1>
 
-			<total-rating>{rating.totalRating.value}/5</total-rating>
-
-			<poster-overlay>
-				<movie-title>{rating.movie.title}</movie-title>
-			</poster-overlay>
-		</movie-poster>
-	{:else}
-		<empty-table>
-			<h2>No ratings completed</h2>
-			<p>Add a new rating to begin</p>
-		</empty-table>
-	{/each}
-</rating-table>
+<MovieTable data={{ movies: data.ratings, onSelectPathTemplate: 'ratings/*' }}>
+	<empty-table>
+		<h2>No Ratings</h2>
+		<p>Add a new rating to get started</p>
+	</empty-table>
+</MovieTable>
 
 <button-wrap>
 	<SimpleButton onClick={() => goto(data.url?.href + 'ratings/new')} {onKeyUp}
-		>New Rating</SimpleButton
+		>Add Rating</SimpleButton
 	>
 </button-wrap>
 
@@ -51,81 +32,9 @@
 	h1 {
 		font-size: 3.5rem;
 		font-weight: 600;
-	}
-	rating-table {
-		display: flex;
-		width: 100%;
-		flex-wrap: wrap;
-		align-items: start;
-		gap: 16px;
+		font-size: var(--font-size-h1);
 		margin-top: 1rem;
-		min-height: 35vh;
-		/* -1rem on bottom to offset the movie poster margin for last row */
-		padding: 1rem;
-	}
-
-	movie-poster {
-		display: flex;
-		flex-direction: column;
-		position: relative;
-
-		width: 185px;
-		border-radius: 5px;
-		margin-bottom: 2rem;
-
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		overflow: hidden;
-		transition: box-shadow 0.3s ease;
-	}
-
-	movie-poster:hover {
-		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-	}
-
-	.poster-img {
-		/* Force img to fit to 278px - Mostly the standard, but will zoom anything that doesn't fit */
-		object-fit: cover;
-		height: 278px;
-		width: 185px;
-	}
-
-	total-rating {
-		display: flex;
-		background-color: rgba(0, 0, 0, 0.4);
-		color: white;
-		font-size: 26px;
-		align-items: center;
-		justify-content: center;
-		font-weight: bold;
-	}
-
-	poster-overlay {
-		display: flex;
-		position: absolute;
-		justify-content: center;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-
-		padding-top: 1rem;
-
-		transition: opacity 0.5s ease;
-		background-color: rgba(0, 0, 0, 0.5);
-		opacity: 0;
-		z-index: 1;
-	}
-
-	poster-overlay:hover {
-		opacity: 1;
-	}
-
-	movie-title {
-		color: white;
-		font-weight: bold;
-		font-size: 1.3rem;
-		text-align: center;
-		padding: 0 0.5rem;
+		color: var(--color-title-primary);
 	}
 
 	empty-table {
@@ -138,6 +47,8 @@
 	}
 
 	button-wrap {
-		margin-top: 2rem;
+		display: flex;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
 	}
 </style>
