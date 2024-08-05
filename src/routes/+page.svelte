@@ -13,7 +13,14 @@
 	}
 </script>
 
-<h1>Ratings</h1>
+<header>
+	<h1>Ratings</h1>
+	<button-wrap>
+		<SimpleButton size="sm" onClick={() => goto(data.url?.href + 'ratings/new')} {onKeyUp}
+			>+</SimpleButton
+		>
+	</button-wrap>
+</header>
 
 <MovieTable data={{ movies: data.ratings, onSelectPathTemplate: 'ratings/*' }}>
 	<empty-table>
@@ -22,18 +29,19 @@
 	</empty-table>
 </MovieTable>
 
-<button-wrap>
-	<SimpleButton onClick={() => goto(data.url?.href + 'ratings/new')} {onKeyUp}
-		>Add Rating</SimpleButton
-	>
-</button-wrap>
-
 <style>
+	header {
+		display: flex;
+		width: 100%;
+		padding: 0 12.5px;
+		flex: 1;
+		justify-content: space-between;
+		margin-top: 1rem;
+	}
 	h1 {
 		font-size: 3.5rem;
 		font-weight: 600;
 		font-size: var(--font-size-h1);
-		margin-top: 1rem;
 		color: var(--color-title-primary);
 	}
 
@@ -48,7 +56,6 @@
 
 	button-wrap {
 		display: flex;
-		margin-top: 1rem;
-		margin-bottom: 1rem;
+		align-items: center;
 	}
 </style>

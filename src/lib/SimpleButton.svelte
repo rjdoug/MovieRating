@@ -1,10 +1,21 @@
 <script lang="ts">
 	export let onKeyUp: ((event: KeyboardEvent) => void) | null;
 	export let onClick: (() => void) | null;
+	export let size: 'sm' | 'm';
 </script>
 
 <!--  navigate to new -->
-<add-rating-button role="button" tabindex="0" on:keyup={onKeyUp} on:click={onClick}>
+<add-rating-button
+	style={size == 'sm'
+		? `border-radius: 5px;
+padding: 12px 16px;
+border-radius: 50px;`
+		: ''}
+	role="button"
+	tabindex="0"
+	on:keyup={onKeyUp}
+	on:click={onClick}
+>
 	<slot />
 </add-rating-button>
 
