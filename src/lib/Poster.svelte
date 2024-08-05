@@ -12,6 +12,12 @@
 
 	export let data: Data;
 
+	let isImageBroken = false;
+
+	function handleImageError() {
+		isImageBroken = true;
+	}
+
 	$: selectable = !!data.onSelectPath;
 </script>
 
@@ -22,11 +28,16 @@
 		if (selectable) goto(data.onSelectPath || '');
 	}}
 >
-	<img
-		class="poster-img"
-		src={buildTMDBImgUrl(data.movie.poster_path)}
-		alt={data.movie.title + ' poster'}
-	/>
+	{#if isImageBroken}
+		<img class="poster-img" src={'/img/movie-not-found.png'} alt={data.movie.title + ' poster'} />
+	{:else}
+		<img
+			class="poster-img"
+			src={buildTMDBImgUrl(data.movie.poster_path)}
+			alt={data.movie.title + ' poster'}
+			on:error={handleImageError}
+		/>
+	{/if}
 
 	{#if data.totalRating}
 		<total-rating>{data.totalRating?.value * 2}/10</total-rating>

@@ -1,10 +1,13 @@
 <!-- NOTE: If you need to wrap the component, the wraps display needs to be flex, contents -->
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Poster from '$lib/Poster.svelte';
 	import { userID } from '$lib/stores.js';
 	import { categories, getRatingCategoryData as filterRatingByCategories } from '$lib/utils';
 	import { error } from '@sveltejs/kit';
+	import { Button } from 'carbon-components-svelte';
 	import { get } from 'svelte/store';
+	import { TrashCan } from 'carbon-icons-svelte';
 
 	export let data;
 
@@ -28,7 +31,7 @@
 <header>
 	<h1>{data.rating.movie.title}</h1>
 	<!-- TODO: Reimplement as 3 dot menu -->
-	<!-- <delete-button>
+	<delete-button>
 		<Button
 			kind="danger-tertiary"
 			iconDescription="Delete"
@@ -39,7 +42,7 @@
 				goto('/');
 			}}
 		/>
-	</delete-button> -->
+	</delete-button>
 </header>
 <main>
 	<poster-wrap>
