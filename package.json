@@ -35,7 +35,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@lucia-auth/adapter-mysql": "^3.0.2",
 		"iconify-icon": "^2.0.0",
+		"lucia": "^3.2.0",
 		"mysql2": "^3.9.2"
 	}
 }
